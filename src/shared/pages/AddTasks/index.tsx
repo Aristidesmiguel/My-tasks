@@ -39,15 +39,15 @@ export const AddTasks = () => {
   const handleAction  = (valueOfInput: string, date: string) => {
     const title = valueOfInput.trim()
     if (title.length === 0) {
-      showToast("O Campo tarefa, Está Vasio", ToastStatus.WARNING);
+      showToast("O Campo tarefa, Está Vasio", 'info');
       return;
     } else if (date === "") {
-      showToast("O Campo Date, Está Vasio", ToastStatus.WARNING);
+      showToast("O Campo Date, Está Vasio", 'info');
       return;
     }
     
     if (lista.some((listItem) => listItem.title === title)) {
-      showToast("Tarefa Já Existe", ToastStatus.INFO);
+      showToast("Tarefa Já Existe", 'info');
     } else {
       const task: ITarefa = {
         id: Date.now(),
@@ -57,7 +57,7 @@ export const AddTasks = () => {
       };
       setLista((newTasks) => [...newTasks, task]);
       dataBase.salvarTarefa(task, chave);
-      showToast("Tarefa Criada Com Sucesso", ToastStatus.SUCCESS);
+      showToast("Tarefa Criada Com Sucesso", 'success');
     }
   };
 

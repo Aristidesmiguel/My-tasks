@@ -40,7 +40,7 @@ export const Dashboard = () => {
       dataBase.removeTarefa(chave, selectedTaskId);
       setTimeout(() => {
         setTasks(tasks.filter((item) => item.id !== selectedTaskId));
-        showToast("Tarefa Eliminada", ToastStatus.INFO)
+        showToast("Tarefa Eliminada", 'info')
       }, 1000);
     }
     setIsOpenD(false);

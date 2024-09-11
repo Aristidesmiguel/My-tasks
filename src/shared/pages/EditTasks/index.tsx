@@ -41,7 +41,7 @@ export const TasksEdit = () => {
   const handleOnPressEnter = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
       if (inputValue === "") {
-        showToast("Nenhuma tarefa selecionada", ToastStatus.INFO);
+        showToast("Nenhuma tarefa selecionada", 'info');
       } else {
         mainFunction();
       }
@@ -50,7 +50,7 @@ export const TasksEdit = () => {
 
   const handleOnClickButton = () => {
     if (inputValue === "") {
-      showToast("Nenhuma tarefa selecionada", ToastStatus.INFO);
+      showToast("Nenhuma tarefa selecionada", 'info');
     } else {
       mainFunction();
     }
@@ -58,7 +58,7 @@ export const TasksEdit = () => {
 
   const mainFunction = () => {
     if (selectedTaskId === null) {
-      showToast("Nenhuma tarefa selecionada", ToastStatus.WARNING);
+      showToast("Nenhuma tarefa selecionada", 'warning');
       return;
     }
     const taskToUpdate = tasks.find((tarefa) => tarefa.id === selectedTaskId);
@@ -72,9 +72,9 @@ export const TasksEdit = () => {
         )
       );
       dataBase.editarTarefa(chave, updatedTask);
-      showToast("Tarefa atualizada com sucesso", ToastStatus.SUCCESS);
+      showToast("Tarefa atualizada com sucesso", 'success');
     } else {
-      showToast("A tarefa não foi atualizada", ToastStatus.WARNING);
+      showToast("A tarefa não foi atualizada", 'warning');
     }
   };
 

@@ -19,10 +19,4 @@ export interface ITarefa {
 }
 
 
-export enum ToastStatus {
-    SUCCESS = 'success',
-    ERROR = 'error',
-    INFO = 'info',
-    WARNING = 'waring',
-    
-}
+export type ToastStatus = 'info' | 'success' | 'warning' | 'error';
