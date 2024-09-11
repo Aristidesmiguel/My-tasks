@@ -1,0 +1,29 @@
+*{
+    font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+
+}
+
+.chakra-ui-light {
+    background-color: #2E2938;
+    height: auto;
+}
+
+a{
+    text-decoration: none;
+}
+
+
+
+.bg-purple{
+    background-color: #b4acf9;
+    color: #FFF;
+}
+
+.active {
+    color: #b4acf9;
+}
+
+p
+{
+    color: white;   
+}

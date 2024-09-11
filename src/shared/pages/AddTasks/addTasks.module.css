@@ -1,0 +1,95 @@
+
+
+.container_main {
+    width: 100%;
+    height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+}
+
+.addTasksMain {
+    width: 50vw;
+    color: white;
+}
+
+label{
+    color: #b4acf9;
+}
+.corpo{
+    margin-top: 0px;
+    background: none;
+    padding: 30px;
+    width: 50vw;
+    display: flex;
+    flex-direction: column;
+    align-items: self-start;
+}
+
+.title{
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    padding: 10px;
+    justify-content: space-around;
+    width: 20vw;
+    margin-bottom: 50px;
+}
+
+.subtitle{
+    text-align: start;
+}
+
+.subtitle h1 {
+    font-size: 2rem;
+}
+
+.title img{
+    background-color: #363041;
+    padding: 25px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+.tesks{
+    display: flex;
+    flex-direction: column;
+    align-items: self-start;
+    margin-left: 30px;
+}
+.tesks input{
+    background-color: #363041;
+    width: 40vw;
+    padding: 15px;
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-around;
+    border: none;
+    align-items: center;
+    border-radius: 10px;
+    outline: none;
+    font-size: 1em;
+    font-weight: 700;
+    margin-bottom: 30px;
+}
+
+.buttons{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.buttons button{
+    margin-bottom: 10px;
+    width: 40vw;
+    margin-left: 25px;
+}
+
+.buttons button:nth-child(2){
+    background: #363041;
+}
+.buttons button:nth-child(2):hover{
+    background: #463d57;
+}

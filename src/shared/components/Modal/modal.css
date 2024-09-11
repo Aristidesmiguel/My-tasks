@@ -1,0 +1,14 @@
+
+
+.footer {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    width: 100%;
+}
+.footer button {
+    padding: 5px;
+}
+.footer button:nth-child(1){
+    background-color: rgba(255, 0, 0, 0.562);
+}

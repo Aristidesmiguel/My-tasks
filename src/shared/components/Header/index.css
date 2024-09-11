@@ -1,0 +1,43 @@
+#cabeca{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 30px;
+    background-color: #363041;
+    color: white;
+}
+.icones, .addTasks, .profile, .address, .perfile_info, a, p, img, h4, #foto_perfil{
+    background-color: #363041;
+}
+.icones img{
+    margin-left: 10px;
+}
+.icones, .addTasks, .profile{
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+.profile img{
+    border-radius: 50%;
+    margin-right: 8px;
+}
+.addTasks{
+    width: 200px;
+    background-color: #363041;
+}
+.addTasks p{
+    margin-left: 10px;
+}
+#foto_perfil{
+    width: 50px;
+    height: 50px;
+}
+
+.perfile_info p{
+    display: flex;
+    align-items: center;
+    
+}
+p a{
+    color: #B4ACF9;  
+}

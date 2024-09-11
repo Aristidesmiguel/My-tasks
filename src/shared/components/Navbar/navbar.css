@@ -1,0 +1,41 @@
+
+.navbar {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 10px;
+}
+
+.navbar .title {
+  font-size: 32px;
+  font-weight: 700;
+  width: 20vw;
+ 
+}
+
+.title span{
+  text-transform: uppercase;
+}
+span strong {
+  color: white;
+}
+
+
+.navbar ul{
+    display: flex;
+    align-items: center;
+    gap: 4rem;
+}
+
+.navbar ul li{
+    list-style: none;
+}
+
+li a {
+  transition: .2s;
+  font-weight: bolder;
+}
+
+li a:hover{
+  color: #b4acf9;
+}
