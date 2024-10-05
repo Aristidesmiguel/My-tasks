@@ -74,8 +74,7 @@ export const Dashboard = () => {
     );
   };
   useEffect(() => {
-    const dataBaseTasks = dataBase.buscarTarefas(chave);
-    setTasks(dataBaseTasks);
+    dataBase.buscarTarefas().then((tasks) => setTasks(tasks));
   }, []);
 
   const toast = useToast();
@@ -87,7 +86,7 @@ export const Dashboard = () => {
       status: status,
     });
   };
-  
+
   return (
     <>
       <Modal onClose={onChoseD} isOpen={isOpenD} size={"xl"} isCentered>
@@ -141,12 +140,10 @@ export const Dashboard = () => {
                 </div>
                 <div id="myList" className={dashboardCss.tasks}>
                   <ul>
-                    {tasks.map((task) => (
-                      <div style={{
-                        display: task.title.indexOf(value) > -1 ? '' : 'none'
-                      }}>
+                    {tasks.filter(task => task.title?.toLocaleLowerCase().includes(value.toLocaleLowerCase())).map((task) => (
+                      <div>
                         <div
-                          
+
                           id="list"
                           className={dashboardCss.tasksCreated}
                           key={task.id}
@@ -169,7 +166,7 @@ export const Dashboard = () => {
                                 {task.title}
                               </li>
                             </div>
-                              <span style={{color: '#b4acf9', fontSize: '10px'}}>{ task.data }</span>
+                            <span style={{ color: '#b4acf9', fontSize: '10px' }}>{task.data}</span>
                           </div>
                           <img
                             onClick={() => onOpenD(task.id)}

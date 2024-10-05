@@ -12,24 +12,21 @@ import React from "react";
 import { Button } from "../Button";
 
 import "./modal.css";
-import dataBase from "../../server/bancoDeDados";
 
 interface IProps {
   isOpen: boolean;
   onClose: () => void;
 }
 
-const tasks = dataBase.buscarTarefas("listas")
- 
 
 export const ModalDelete: React.FC<IProps> = ({ isOpen, onClose }) => {
   const  selectId = () => {
-    tasks.map((task) => {
+    /* tasks.map((task) => {
       if (task.isSelect === true){
         console.log(task.id);
         
       }  
-    })
+    }) */
   }
   return (
     <>

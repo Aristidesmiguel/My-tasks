@@ -36,7 +36,7 @@ export const AddTasks = () => {
     setIsOpenD(true);
   };
 
-  const handleAction  = (valueOfInput: string, date: string) => {
+  const handleAction = (valueOfInput: string, date: string) => {
     const title = valueOfInput.trim()
     if (title.length === 0) {
       showToast("O Campo tarefa, Está Vasio", 'info');
@@ -45,7 +45,7 @@ export const AddTasks = () => {
       showToast("O Campo Date, Está Vasio", 'info');
       return;
     }
-    
+
     if (lista.some((listItem) => listItem.title === title)) {
       showToast("Tarefa Já Existe", 'info');
     } else {
@@ -55,9 +55,13 @@ export const AddTasks = () => {
         title: title,
         data: date
       };
-      setLista((newTasks) => [...newTasks, task]);
-      dataBase.salvarTarefa(task, chave);
-      showToast("Tarefa Criada Com Sucesso", 'success');
+
+      dataBase.salvarTarefa(task)
+        .then(() => {
+          setLista((newTasks) => [...newTasks, task]);
+          showToast("Tarefa Criada Com Sucesso", 'success');
+        })
+        .catch(() => showToast("Erro ao salvar a tarefa", 'error'));
     }
   };
 
@@ -80,13 +84,13 @@ export const AddTasks = () => {
   const handleOnDateChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
     setSelectdDate(e.target.value)
   }
-    
 
-   const handleOnClickButton = () => {
+
+  const handleOnClickButton = () => {
     const inputElement = document.getElementById("value") as HTMLInputElement
     handleAction(inputElement.value, selectdDate)
     inputElement.value = ""
-   }
+  }
 
   return (
     <>
@@ -98,9 +102,9 @@ export const AddTasks = () => {
           <div className={addtasks.corpo}>
             <div className={addtasks.title}>
               <div className={addtasks.img}>
-              <a href={ROUTES.dashboard}>
-              <img src="seta-esquerda.png" alt="seta-esquerda" />
-              </a>
+                <a href={ROUTES.dashboard}>
+                  <img src="seta-esquerda.png" alt="seta-esquerda" />
+                </a>
               </div>
               <div className={addtasks.subtitle}>
                 <h1>Add tasks</h1>
@@ -133,12 +137,12 @@ export const AddTasks = () => {
         </main>
         <Drawer placement="left" onClose={onCloseDrawer} isOpen={isOpenD}>
           <DrawerOverlay />
-          <DrawerContent style={{ background: '#B4ACF9'}}>
+          <DrawerContent style={{ background: '#B4ACF9' }}>
             <DrawerHeader>
               <DrawerCloseButton />
             </DrawerHeader>
             <DrawerBody>
-             <Menu/>
+              <Menu />
             </DrawerBody>
           </DrawerContent>
         </Drawer>
