@@ -37,7 +37,7 @@ export const Dashboard = () => {
 
   const handleClickButton_TaskRemove = () => {
     if (selectedTaskId !== null) {
-      dataBase.removeTarefa(chave, selectedTaskId);
+      dataBase.removeTarefa(selectedTaskId);
       setTimeout(() => {
         setTasks(tasks.filter((item) => item.id !== selectedTaskId));
         showToast("Tarefa Eliminada", 'info')

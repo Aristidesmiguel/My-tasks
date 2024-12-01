@@ -1,4 +1,4 @@
-import { addDoc, collection, getDocs, query } from "firebase/firestore";
+import { addDoc, collection, deleteDoc, getDocs, query, doc, updateDoc } from "firebase/firestore";
 import { ITarefa } from "../utils";
 import { db } from "../services/firebase";
 
@@ -26,24 +26,18 @@ function editarTarefa(nomeDaChave: string, tarefaEditado: ITarefa) {
 
   }
 }
-function isCompled(nomeDaChave: string, tarefaEditado: ITarefa) {
-  try {
-    const elementos = buscarTarefas(nomeDaChave);
-    const elementoEditado = elementos.map((item: any) => {
-      return item.id === tarefaEditado.id ? tarefaEditado : item;
-    });
-    localStorage.setItem(nomeDaChave, JSON.stringify(elementoEditado));
-  } catch (error) {
-    console.error("Erro ao atualizar a tarefa:", error);
-  }
+async function isCompled(id: number) {
+  const upTask = doc(db, COLLECTION_NAME, id.toString())
+  await updateDoc(upTask, {})
 }
 
-function removeTarefa(nomeDaChave: string, id: number) {
-  const elemento = buscarTarefas(nomeDaChave);
-  const elementoFiltrado = elemento.filter((item: ITarefa) =>
-    item.id !== id
-  );
-  localStorage.setItem(nomeDaChave, JSON.stringify(elementoFiltrado));
+async function removeTarefa(id: number) {
+    const docRef = doc(db, COLLECTION_NAME, id.toString());  
+    await deleteDoc(docRef);
+    console.log(`Documento com ID ${id} excluído com sucesso!`);
+    console.log(`Documento com ID ${id.toString()} excluído com sucesso!`);
+    return docRef.id
+  
 }
 
 async function buscarTarefas(): Promise<ITarefa[]> {
