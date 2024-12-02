@@ -1,8 +1,8 @@
 import { addDoc, collection, deleteDoc, getDocs, query, doc, updateDoc } from "firebase/firestore";
-import { ITarefa } from "../utils";
+import { COLLECTION_NAME, ITarefa } from "../utils";
 import { db } from "../services/firebase";
 
-const COLLECTION_NAME = "tasks";
+
 
 async function salvarTarefa(valorDoItem: ITarefa): Promise<string> {
   const docRef = await addDoc(collection(db, COLLECTION_NAME), valorDoItem);
@@ -27,12 +27,10 @@ function editarTarefa(nomeDaChave: string, tarefaEditado: ITarefa) {
   }
 }
 async function isCompled(id: number) {
-  const upTask = doc(db, COLLECTION_NAME, id.toString())
-  await updateDoc(upTask, {})
 }
 
-async function removeTarefa(id: number) {
-    const docRef = doc(db, COLLECTION_NAME, id.toString());  
+async function removeTarefa(id: string) {
+    const docRef = doc(db, COLLECTION_NAME, id);  
     await deleteDoc(docRef);
     console.log(`Documento com ID ${id} excluído com sucesso!`);
     console.log(`Documento com ID ${id.toString()} excluído com sucesso!`);

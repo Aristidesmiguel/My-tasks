@@ -17,11 +17,11 @@ import {
 import React, { useEffect, useState } from "react";
 
 import { DashboardHeader, Menu, Button } from "../../components";
-
+import { collection, getDocs, query } from "firebase/firestore";
 import dashboardCss from "./dashboard.module.css";
 import dataBase from "../../server/bancoDeDados";
-import { chave } from "../AddTasks";
-import { ITarefa, ToastStatus } from "../../utils";
+import { COLLECTION_NAME, ITarefa, ToastStatus } from "../../utils";
+import { db } from "../../services/firebase";
 
 export const Dashboard = () => {
   const [isOpenM, setIsOpen] = useState(false);
@@ -29,7 +29,7 @@ export const Dashboard = () => {
   const [tasks, setTasks] = useState<ITarefa[]>([]);
   const [isOpenD, setIsOpenD] = useState(false);
   const [value, setValue] = useState('')
-  const [selectedTaskId, setSelectedTaskId] = useState<number | null>(null);
+  const [selectedTaskId, setSelectedTaskId] = useState<string | null>(null);
 
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setValue(e.target.value)
@@ -38,6 +38,7 @@ export const Dashboard = () => {
   const handleClickButton_TaskRemove = () => {
     if (selectedTaskId !== null) {
       dataBase.removeTarefa(selectedTaskId);
+
       setTimeout(() => {
         setTasks(tasks.filter((item) => item.id !== selectedTaskId));
         showToast("Tarefa Eliminada", 'info')
@@ -49,11 +50,19 @@ export const Dashboard = () => {
   const onChoseD = () => {
     setIsOpenD(false);
   };
-  const onOpenD = (id: number) => {
+  const onOpenD = () => {
     setIsOpenD(true);
-    setSelectedTaskId(id);
-    console.log(id);
+    test()
   };
+
+  const test = async  () => {
+    const q = query(collection(db, COLLECTION_NAME));
+    const querySnapshot = await  getDocs(q);
+    querySnapshot.forEach((doc) => {
+      console.log(doc.id);
+      setSelectedTaskId(doc.id);
+    });
+  }
 
   const onCloseM = () => {
     setIsOpen(false);
@@ -169,7 +178,7 @@ export const Dashboard = () => {
                             <span style={{ color: '#b4acf9', fontSize: '10px' }}>{task.data}</span>
                           </div>
                           <img
-                            onClick={() => onOpenD(task.id)}
+                            onClick={() => onOpenD()}
                             style={{
                               display: task.isSelect ? "block" : "none",
                             }}
