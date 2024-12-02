@@ -1,4 +1,5 @@
 import {
+  Button,
   Drawer,
   DrawerBody,
   DrawerCloseButton,
@@ -16,7 +17,7 @@ import {
 } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 
-import { DashboardHeader, Menu, Button } from "../../components";
+import { DashboardHeader, Menu } from "../../components";
 import { collection, getDocs, query } from "firebase/firestore";
 import dashboardCss from "./dashboard.module.css";
 import dataBase from "../../server/bancoDeDados";
@@ -30,23 +31,31 @@ export const Dashboard = () => {
   const [isOpenD, setIsOpenD] = useState(false);
   const [value, setValue] = useState('')
   const [selectedTaskId, setSelectedTaskId] = useState<string | null>(null);
-
+  const [isDeleting, setIsDeleting] = useState(false);
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setValue(e.target.value)
   }
 
   const handleClickButton_TaskRemove = () => {
     if (selectedTaskId !== null) {
-      dataBase.removeTarefa(selectedTaskId);
+      setIsDeleting(true);
+      dataBase.removeTarefa(selectedTaskId)
+        .then(() => {
+          setTasks(tasks.filter((item) => item.id !== selectedTaskId));
+          showToast("Tarefa Eliminada", 'info')
+          setIsOpenD(false);
+        })
+        .catch(() => {
+          showToast("Erro ao eliminar a tarefa", 'error')
+        })
+        .finally(() => setIsDeleting(false))
 
       /* setTimeout(() => {
         setTasks(tasks.filter((item) => item.id !== selectedTaskId));
         showToast("Tarefa Eliminada", 'info')
       }, 1000); */
-      setTasks(tasks.filter((item) => item.id !== selectedTaskId));
-      showToast("Tarefa Eliminada", 'info')
+
     }
-    setIsOpenD(false);
   };
 
   const onChoseD = () => {
@@ -57,9 +66,9 @@ export const Dashboard = () => {
     test()
   };
 
-  const test = async  () => {
+  const test = async () => {
     const q = query(collection(db, COLLECTION_NAME));
-    const querySnapshot = await  getDocs(q);
+    const querySnapshot = await getDocs(q);
     querySnapshot.forEach((doc) => {
       console.log(doc.id);
       setSelectedTaskId(doc.id);
@@ -114,10 +123,13 @@ export const Dashboard = () => {
           <ModalFooter>
             <div className="footer">
               <Button
-                handleClickButton={handleClickButton_TaskRemove}
-                title="Deletar"
-              />
-              <Button handleClickButton={onChoseD} title="Cancelar" />
+                onClick={handleClickButton_TaskRemove}
+                value={"Eliminar"}
+                isLoading={isDeleting}
+                color={"white"}
+                loadingText="Eliminando..."
+              >Eliminar</Button>
+              <Button onClick={onChoseD} disabled={isDeleting}>Cancelar</Button>
             </div>
           </ModalFooter>
         </ModalContent>
