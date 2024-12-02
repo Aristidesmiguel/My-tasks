@@ -14,7 +14,7 @@ export const ROUTES = {
 }
 
 export interface ITarefa {
-    id: number
+    id: number | string
     title: string
     isSelect: boolean
     data: string

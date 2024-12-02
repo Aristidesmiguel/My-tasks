@@ -39,10 +39,12 @@ export const Dashboard = () => {
     if (selectedTaskId !== null) {
       dataBase.removeTarefa(selectedTaskId);
 
-      setTimeout(() => {
+      /* setTimeout(() => {
         setTasks(tasks.filter((item) => item.id !== selectedTaskId));
         showToast("Tarefa Eliminada", 'info')
-      }, 1000);
+      }, 1000); */
+      setTasks(tasks.filter((item) => item.id !== selectedTaskId));
+      showToast("Tarefa Eliminada", 'info')
     }
     setIsOpenD(false);
   };

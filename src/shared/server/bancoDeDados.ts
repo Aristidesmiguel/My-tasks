@@ -30,12 +30,12 @@ async function isCompled(id: number) {
 }
 
 async function removeTarefa(id: string) {
-    const docRef = doc(db, COLLECTION_NAME, id);  
-    await deleteDoc(docRef);
-    console.log(`Documento com ID ${id} excluído com sucesso!`);
-    console.log(`Documento com ID ${id.toString()} excluído com sucesso!`);
-    return docRef.id
-  
+  const docRef = doc(db, COLLECTION_NAME, id);
+  await deleteDoc(docRef);
+  console.log(`Documento com ID ${id} excluído com sucesso!`);
+  console.log(`Documento com ID ${id.toString()} excluído com sucesso!`);
+  return docRef.id
+
 }
 
 async function buscarTarefas(): Promise<ITarefa[]> {
@@ -45,7 +45,7 @@ async function buscarTarefas(): Promise<ITarefa[]> {
 
   const querySnapshot = await getDocs(q);
   querySnapshot.forEach((doc) => {
-    const task = doc.data() as ITarefa;
+    const task = { ...doc.data() as ITarefa, id: doc.id };
     tasks.push(task);
   });
   return tasks;
