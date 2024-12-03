@@ -26,14 +26,14 @@ function editarTarefa(nomeDaChave: string, tarefaEditado: ITarefa) {
 
   }
 }
-async function isCompled(id: number) {
+async function isCompled(id: string, value: boolean) {
+  const docRef = doc(db, COLLECTION_NAME, id)
+  await updateDoc(docRef, { isSelect: value })
 }
 
 async function removeTarefa(id: string) {
   const docRef = doc(db, COLLECTION_NAME, id);
   await deleteDoc(docRef);
-  console.log(`Documento com ID ${id} excluído com sucesso!`);
-  console.log(`Documento com ID ${id.toString()} excluído com sucesso!`);
   return docRef.id
 
 }

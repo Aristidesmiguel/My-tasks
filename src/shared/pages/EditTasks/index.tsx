@@ -21,7 +21,7 @@ export const TasksEdit = () => {
   const [isOpenM, setIsOpen] = useState(false);
   const [inputValue, setInputValue] = useState<string>("");
   const [tasks, setTasks] = useState<ITarefa[]>([]);
-  const [selectedTaskId, setSelectedTaskId] = useState<number | null>(null);
+  const [selectedTaskId, setSelectedTaskId] = useState<string | null>(null);
 
   const onCloseM = () => {
     setIsOpen(false);
@@ -30,8 +30,7 @@ export const TasksEdit = () => {
     setIsOpen(true);
   };
   useEffect(() => {
-    const dataBaseTasks = dataBase.buscarTarefas(chave);
-    setTasks(dataBaseTasks);
+    dataBase.buscarTarefas().then((tasks) => setTasks(tasks));
   }, []);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -78,7 +77,7 @@ export const TasksEdit = () => {
     }
   };
 
-  const handleTaskClick = (value: string, id: number) => {
+  const handleTaskClick = (value: string, id: number | string) => {
     setInputValue(value);
     setSelectedTaskId(id);
   };
@@ -122,23 +121,23 @@ export const TasksEdit = () => {
                   <ul>
                     {tasks.map((task) => (
                       <div key={task.id}>
-                        <div
-                          id="list"
-                          className={editTasks.tasksCreated}
-                          key={task.id}
-                          style={{ display: task.isSelect ? "none" : "block" }}
-                        >
-                          <div className={editTasks.info}>
-                            <li style={{ listStyle: "none" }}>{task.title}</li>
-                            <CiEdit
-                              onClick={() =>
-                                handleTaskClick(task.title, task.id)
-                              }
-                              className={editTasks.iconEdit}
-                            />
-                          </div>
+                      <div
+                        id="list"
+                        className={editTasks.tasksCreated}
+                        key={task.id}
+                        style={{ display: task.isSelect ? "none" : "block" }}
+                      >
+                        <div className={editTasks.info}>
+                          <li style={{ listStyle: "none" }}>{task.title}</li>
+                          <CiEdit
+                            onClick={() =>
+                              handleTaskClick(task.title, task.id)
+                            }
+                            className={editTasks.iconEdit}
+                          />
                         </div>
                       </div>
+                    </div>
                     ))}
                   </ul>
                 </div>

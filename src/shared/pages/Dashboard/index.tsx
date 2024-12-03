@@ -63,10 +63,10 @@ export const Dashboard = () => {
   };
   const onOpenD = () => {
     setIsOpenD(true);
-    test()
+    getTasks()
   };
 
-  const test = async () => {
+  const getTasks = async () => {
     const q = query(collection(db, COLLECTION_NAME));
     const querySnapshot = await getDocs(q);
     querySnapshot.forEach((doc) => {
@@ -81,17 +81,29 @@ export const Dashboard = () => {
   const onOpenM = () => {
     setIsOpen(true);
   };
-  const handleToggleComplete = (id: number) => {
-    setTasks(
-      tasks.map((task) => {
-        if (task.id === id) {
-          const test = { ...task, isSelect: !task.isSelect };
-          dataBase.isCompled("listas", test);
-          return test
-        }
-        return task;
-      })
-    );
+  const handleToggleComplete = async (id: number | string) => {
+    
+     const q = query(collection(db, COLLECTION_NAME));
+      const querySnapshot = await getDocs(q);
+      querySnapshot.forEach((doc) => {
+        setTasks(
+          tasks.map((task)  =>  {
+            if (task.id === id) {
+              const test = { ...doc.data() as ITarefa };
+              let value = test.isSelect = !test.isSelect
+              dataBase.isCompled(doc.id, value).then(() => {
+                showToast("Tarefa Concluida", 'info')
+              })
+              .catch((error) => {
+                showToast(`Erro: ${error}`, 'info')
+              })
+              return test
+            }
+            return task;
+          })
+         
+        )
+      });
   };
   useEffect(() => {
     dataBase.buscarTarefas().then((tasks) => setTasks(tasks));
