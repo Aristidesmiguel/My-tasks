@@ -114,22 +114,6 @@ export const Dashboard = () => {
       }
     );
 
-    /**
-     * O que este código faz:
-     * 1. Exibe uma notificação de "Atualizando..." enquanto o método `dataBase.isCompled` é executado.
-     * 2. Se a operação for bem-sucedida, exibe "Tarefa atualizada com sucesso".
-     * 3. Se houver falha, exibe "A tarefa não foi atualizada".
-     *
-     * Detalhes sobre o método toast.promise:
-     * - Este método aceita uma Promise e diferentes mensagens para os estados da Promise:
-     *   - `success`: Quando a Promise é resolvida.
-     *   - `error`: Quando a Promise é rejeitada.
-     *   - `loading`: Enquanto a Promise está pendente.
-     *
-     * Por que usar toast.promise?
-     * - Ele melhora a experiência do usuário mostrando o progresso da ação em tempo real.
-     * - Garante que o usuário receba feedback visual em diferentes cenários (sucesso, erro ou carregamento).
-     */
     const newTasks = tasks.map(taskMaped => taskMaped.id === task.id ? { ...task, isSelect: !task.isSelect } : taskMaped)
     setTasks(newTasks)
   };
