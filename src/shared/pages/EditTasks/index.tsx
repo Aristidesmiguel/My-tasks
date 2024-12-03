@@ -55,7 +55,7 @@ export const TasksEdit = () => {
     }
   };
 
-  const mainFunction = () => {
+  const onEditTask = async () => {
     if (selectedTaskId === null) {
       showToast("Nenhuma tarefa selecionada", 'warning');
       return;
@@ -63,6 +63,7 @@ export const TasksEdit = () => {
     const taskToUpdate = tasks.find((tarefa) => tarefa.id === selectedTaskId);
     if (taskToUpdate) {
       const updatedTask = { ...taskToUpdate, title: inputValue.trim() };
+      await dataBase.editarTarefa(chave, updatedTask)
       setTasks(
         tasks.map((task) =>
           task.id === selectedTaskId
@@ -70,11 +71,31 @@ export const TasksEdit = () => {
             : task
         )
       );
-      dataBase.editarTarefa(chave, updatedTask);
-      showToast("Tarefa atualizada com sucesso", 'success');
     } else {
       showToast("A tarefa não foi atualizada", 'warning');
     }
+  }
+
+  const mainFunction = () => {
+
+
+    toast.promise(onEditTask(), {
+      success: {
+        title: "Tarefa atualizada com sucesso",
+        //position: "top-right"
+      },
+      error: {
+        title: "A tarefa não foi atualizada",
+      },
+      loading: { title: "Atualizando...", position: "top-right" },
+    })
+    /* dataBase.editarTarefa(chave, updatedTask)
+      .then(() => showToast("Tarefa atualizada com sucesso", 'success'))
+      .catch((error) => {
+        console.error(error);
+        showToast("A tarefa não foi atualizada", 'warning')
+      }) */
+
   };
 
   const handleTaskClick = (value: string, id: number | string) => {
@@ -121,23 +142,23 @@ export const TasksEdit = () => {
                   <ul>
                     {tasks.map((task) => (
                       <div key={task.id}>
-                      <div
-                        id="list"
-                        className={editTasks.tasksCreated}
-                        key={task.id}
-                        style={{ display: task.isSelect ? "none" : "block" }}
-                      >
-                        <div className={editTasks.info}>
-                          <li style={{ listStyle: "none" }}>{task.title}</li>
-                          <CiEdit
-                            onClick={() =>
-                              handleTaskClick(task.title, task.id)
-                            }
-                            className={editTasks.iconEdit}
-                          />
+                        <div
+                          id="list"
+                          className={editTasks.tasksCreated}
+                          key={task.id}
+                          style={{ display: task.isSelect ? "none" : "block" }}
+                        >
+                          <div className={editTasks.info}>
+                            <li style={{ listStyle: "none" }}>{task.title}</li>
+                            <CiEdit
+                              onClick={() =>
+                                handleTaskClick(task.title, task.id)
+                              }
+                              className={editTasks.iconEdit}
+                            />
+                          </div>
                         </div>
                       </div>
-                    </div>
                     ))}
                   </ul>
                 </div>

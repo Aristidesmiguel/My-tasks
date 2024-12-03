@@ -9,8 +9,8 @@ async function salvarTarefa(valorDoItem: ITarefa): Promise<string> {
   return docRef.id;
 }
 
-function editarTarefa(nomeDaChave: string, tarefaEditado: ITarefa) {
-  try {
+async function editarTarefa(nomeDaChave: string, tarefaEditado: ITarefa) {
+  /* try {
     const elementos = buscarTarefas(nomeDaChave);
     if (!Array.isArray(elementos)) {
       console.log('erro O retorno de buscarTarefas não é uma lista válida');
@@ -24,7 +24,14 @@ function editarTarefa(nomeDaChave: string, tarefaEditado: ITarefa) {
   } catch (error) {
     console.error('Erro ao editar a tarefa:' + error);
 
-  }
+  } */
+  const ID = tarefaEditado.id;
+  const docRef = doc(db, COLLECTION_NAME, ID)
+  await updateDoc(docRef, {
+    ...tarefaEditado,
+    data: new Date().toDateString(),
+    title: tarefaEditado.title,
+  })
 }
 async function isCompled(id: string, value: boolean) {
   const docRef = doc(db, COLLECTION_NAME, id)
