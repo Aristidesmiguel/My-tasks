@@ -114,6 +114,7 @@ export const Dashboard = () => {
       }
     );
 
+    // Atualiza o estado da tarefa no componente(algo semelhante ao que fizeste);
     const newTasks = tasks.map(taskMaped => taskMaped.id === task.id ? { ...task, isSelect: !task.isSelect } : taskMaped)
     setTasks(newTasks)
   };
