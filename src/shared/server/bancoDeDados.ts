@@ -33,7 +33,7 @@ async function editarTarefa(nomeDaChave: string, tarefaEditado: ITarefa) {
     title: tarefaEditado.title,
   })
 }
-async function isCompled(id: string, value: boolean) {
+async function isCompled(id: string | number, value: boolean) {
   const docRef = doc(db, COLLECTION_NAME, id)
   await updateDoc(docRef, { isSelect: value })
 }

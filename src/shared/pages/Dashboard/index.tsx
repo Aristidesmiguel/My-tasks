@@ -81,29 +81,57 @@ export const Dashboard = () => {
   const onOpenM = () => {
     setIsOpen(true);
   };
-  const handleToggleComplete = async (id: number | string) => {
-    
-     const q = query(collection(db, COLLECTION_NAME));
-      const querySnapshot = await getDocs(q);
-      querySnapshot.forEach((doc) => {
-        setTasks(
-          tasks.map((task)  =>  {
-            if (task.id === id) {
-              const test = { ...doc.data() as ITarefa };
-              let value = test.isSelect = !test.isSelect
-              dataBase.isCompled(doc.id, value).then(() => {
-                showToast("Tarefa Concluida", 'info')
-              })
-              .catch((error) => {
-                showToast(`Erro: ${error}`, 'info')
-              })
-              return test
-            }
-            return task;
-          })
-         
-        )
-      });
+  const handleToggleComplete = async (task: ITarefa) => {
+
+    //Atualizando o toast de acordo com a atualização do estado da tarefa
+
+    /* 
+      toast.promise => é uma função que espera dois paramêtros      
+        primeiro - promise(ou seja, uma promessa de que algo vai acontecer)
+        segundo - um objecto que fica monitorando a promessa
+      */
+    /**
+ * Atualiza o estado de conclusão de uma tarefa no banco de dados e exibe notificações
+ * usando o método toast.promise para acompanhar o processo assíncrono.
+ */
+    toast.promise(
+      // Chama o método que altera o estado da tarefa no banco de dados
+      dataBase.isCompled(task.id, !task.isSelect), // task.id é o ID da tarefa; !task.isSelect inverte o estado atual
+      {
+        // Configuração da mensagem exibida em caso de sucesso
+        success: {
+          title: "Tarefa atualizada com sucesso",
+        },
+        // Configuração da mensagem exibida em caso de erro
+        error: {
+          title: "A tarefa não foi atualizada",
+        },
+        loading: {
+          title: "Atualizando...",
+          position: "top-right",
+          // Esta mensagem é exibida enquanto o método dataBase.isCompled está sendo executado
+        },
+      }
+    );
+
+    /**
+     * O que este código faz:
+     * 1. Exibe uma notificação de "Atualizando..." enquanto o método `dataBase.isCompled` é executado.
+     * 2. Se a operação for bem-sucedida, exibe "Tarefa atualizada com sucesso".
+     * 3. Se houver falha, exibe "A tarefa não foi atualizada".
+     *
+     * Detalhes sobre o método toast.promise:
+     * - Este método aceita uma Promise e diferentes mensagens para os estados da Promise:
+     *   - `success`: Quando a Promise é resolvida.
+     *   - `error`: Quando a Promise é rejeitada.
+     *   - `loading`: Enquanto a Promise está pendente.
+     *
+     * Por que usar toast.promise?
+     * - Ele melhora a experiência do usuário mostrando o progresso da ação em tempo real.
+     * - Garante que o usuário receba feedback visual em diferentes cenários (sucesso, erro ou carregamento).
+     */
+    const newTasks = tasks.map(taskMaped => taskMaped.id === task.id ? { ...task, isSelect: !task.isSelect } : taskMaped)
+    setTasks(newTasks)
   };
   useEffect(() => {
     dataBase.buscarTarefas().then((tasks) => setTasks(tasks));
@@ -187,7 +215,7 @@ export const Dashboard = () => {
                             <div className={dashboardCss.info}>
                               <input
                                 checked={task.isSelect}
-                                onClick={() => handleToggleComplete(task.id)}
+                                onClick={() => handleToggleComplete(task)}
                                 type="checkbox"
                               />
                               <li
