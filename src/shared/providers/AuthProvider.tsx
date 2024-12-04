@@ -1,7 +1,7 @@
-import { User, onAuthStateChanged, signOut } from 'firebase/auth';
+import { User, onAuthStateChanged, signInWithPopup, signOut } from 'firebase/auth';
 import React, { useState, useEffect } from 'react';
 
-import { auth } from '../services/firebase';
+import { auth, googleProvider } from '../services/firebase';
 import { AuthContext } from '../context';
 
 
@@ -21,8 +21,16 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         await signOut(auth);
     };
 
+    const loginWithGoogle = async () => {
+        try {
+          await signInWithPopup(auth, googleProvider);
+        } catch (error) {
+          console.error('Erro ao fazer login com Google:', error);
+        }
+      };
+
     return (
-        <AuthContext.Provider value={{ user, loading, logout }}>
+        <AuthContext.Provider value={{ user, loading, logout, loginWithGoogle }}>
             {children}
         </AuthContext.Provider>
     );

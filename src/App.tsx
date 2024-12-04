@@ -4,6 +4,8 @@ import "./App.css";
 
 import { Home, SignIn, Tasks, Dashboard, NotFound, AddTasks, TasksEdit } from "./shared/pages";
 import { ROUTES } from "./shared/utils";
+import { ProtectedRoute } from "./shared/routes";
+import { AuthProvider } from "./shared/providers";
 
 const router = createBrowserRouter([
   {
@@ -21,7 +23,10 @@ const router = createBrowserRouter([
   },
   {
     path: ROUTES.dashboard,
-    element: <Dashboard />,
+    element:
+      <ProtectedRoute>
+        <Dashboard />,
+      </ProtectedRoute>
   },
   {
     path: ROUTES.addTasks,
@@ -34,7 +39,11 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
-  return <RouterProvider router={router} />;
+  return (
+    <AuthProvider>
+      <RouterProvider router={router} />;
+    </AuthProvider>
+  )
 }
 
 export default App;

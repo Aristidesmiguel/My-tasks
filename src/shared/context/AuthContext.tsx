@@ -6,6 +6,7 @@ interface AuthContextProps {
   user: User | null;
   loading: boolean;
   logout: () => Promise<void>;
+  loginWithGoogle: () => Promise<void>;
 }
 
 export const AuthContext = createContext<AuthContextProps | undefined>(undefined)
