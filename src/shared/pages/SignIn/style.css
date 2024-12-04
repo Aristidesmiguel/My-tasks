@@ -1,0 +1,19 @@
+#cabeca .addTasks, .profile {
+    display: none;
+}
+
+
+#cabeca {
+    margin: 0;
+}
+
+.fromControl input {
+    border: 2px solid #B4ACF9;
+    color: white;
+    outline: #b4acf9a6;
+}
+
+.fromControl {
+    margin-top: 2em;
+    margin-bottom: 1.5em;
+}

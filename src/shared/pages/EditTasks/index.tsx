@@ -14,7 +14,6 @@ import { FaRegEdit } from "react-icons/fa";
 
 import editTasks from "./EditTasks.module.css";
 import dataBase from "../../server/bancoDeDados";
-import { chave } from "../AddTasks";
 import { ITarefa, ToastStatus } from "../../utils";
 
 export const TasksEdit = () => {
@@ -63,7 +62,7 @@ export const TasksEdit = () => {
     const taskToUpdate = tasks.find((tarefa) => tarefa.id === selectedTaskId);
     if (taskToUpdate) {
       const updatedTask = { ...taskToUpdate, title: inputValue.trim() };
-      await dataBase.editarTarefa(chave, updatedTask)
+      await dataBase.editarTarefa(updatedTask)
       setTasks(
         tasks.map((task) =>
           task.id === selectedTaskId

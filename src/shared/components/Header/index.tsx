@@ -3,7 +3,7 @@ import "./index.css";
 import { ROUTES } from "../../utils";
 
 type DashboardHeaderProps = {
-  onOpen: () => void
+  onOpen?: () => void
 }
 
 export const DashboardHeader = ({onOpen}: DashboardHeaderProps) => {

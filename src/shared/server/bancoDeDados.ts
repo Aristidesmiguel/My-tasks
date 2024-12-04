@@ -9,7 +9,7 @@ async function salvarTarefa(valorDoItem: ITarefa): Promise<string> {
   return docRef.id;
 }
 
-async function editarTarefa(nomeDaChave: string, tarefaEditado: ITarefa) {
+async function editarTarefa(tarefaEditado: ITarefa) {
   /* try {
     const elementos = buscarTarefas(nomeDaChave);
     if (!Array.isArray(elementos)) {
