@@ -2,7 +2,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import "./App.css";
 
-import { Home, SignIn, Tasks, Dashboard, NotFound, AddTasks, TasksEdit } from "./shared/pages";
+import { Home, SignIn, Tasks, Dashboard, NotFound, AddTasks, TasksEdit, SignUp } from "./shared/pages";
 import { ROUTES } from "./shared/utils";
 import { ProtectedRoute } from "./shared/routes";
 import { AuthProvider } from "./shared/providers";
@@ -20,6 +20,10 @@ const router = createBrowserRouter([
   {
     path: ROUTES.signIn,
     element: <SignIn />,
+  },
+  {
+    path: ROUTES.signUp,
+    element: <SignUp />,
   },
   {
     path: ROUTES.dashboard,

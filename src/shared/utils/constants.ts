@@ -8,6 +8,7 @@ export const ROUTES = {
     home: "/",
     tasks: "/tasks",
     signIn: "/sign-in",
+    signUp: "/sign-up",
     dashboard: "/find-task",
     editTasks: "/edit-task",
     addTasks: "/add-tasks"

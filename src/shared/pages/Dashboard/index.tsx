@@ -189,7 +189,7 @@ export const Dashboard = () => {
                 <div id="myList" className={dashboardCss.tasks}>
                   <ul>
                     {tasks.filter(task => task.title?.toLocaleLowerCase().includes(value.toLocaleLowerCase())).map((task) => (
-                      <div>
+                      <div key={task.id}>
                         <div
 
                           id="list"

@@ -58,6 +58,8 @@ async function buscarTarefas(): Promise<ITarefa[]> {
   return tasks;
 }
 
+
+
 const dataBase = {
   salvarTarefa,
   editarTarefa,
