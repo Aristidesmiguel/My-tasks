@@ -14,8 +14,10 @@ export const DashboardHeader = ({ onOpen }: DashboardHeaderProps) => {
     navigate(ROUTES.addTasks)
   }
 
+
   const { user } = useAuth();
-  console.log(user?.photoURL)
+  const photoURL = localStorage.getItem('photoURL')
+  const displayName = localStorage.getItem('displayName')
 
   return (
     <div id="cabeca">
@@ -28,10 +30,10 @@ export const DashboardHeader = ({ onOpen }: DashboardHeaderProps) => {
         </div>
       </div>
       <Box display={"flex"} gap={3}>
-        <Avatar src={user?.photoURL ?? ""} />
+        <Avatar src={user?.photoURL ?? photoURL ?? ""} />
         {/* <img id="foto_perfil" src="foto_perfil.PNG" alt="" /> */}
         <div className="perfile_info">
-          <h4>{user?.displayName}</h4>
+          <h4>{user?.displayName ?? displayName}</h4>
           <p>
             <a href="#">My account</a>
             <img src="seta.png" alt="" />

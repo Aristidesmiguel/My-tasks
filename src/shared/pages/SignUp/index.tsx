@@ -4,13 +4,20 @@ import { Link } from 'react-router-dom'
 import { useAuth } from '../../hooks'
 import { MdOutlineAddAPhoto } from 'react-icons/md'
 
+interface IUserDataProps {
+  name: string;
+  email: string;
+  password: string;
+  file: File | undefined;
+}
+
 export const SignUp = () => {
   const [photoURL, setPhotoURL] = useState('')
-  const [userData, setUserData] = useState({
+  const [userData, setUserData] = useState<IUserDataProps>({
     name: '',
     password: '',
     email: '',
-    photoURL: '',
+    file: undefined,
   })
   const { entering, signUpWithEmailAndPassword } = useAuth()
 
@@ -29,13 +36,14 @@ export const SignUp = () => {
 
   const onSubmit = async () => {
     //console.log(userData)
-    await signUpWithEmailAndPassword({ ...userData, photoURL: photoURL })
+    await signUpWithEmailAndPassword(userData)
   }
 
   const onChooseImage = () => {
     const file = inputRef.current?.files?.[0];
     console.log("FILE: ", file)
     if (file) {
+      setUserData({ ...userData, file });
       const reader = new FileReader();
       reader.onload = () => {
         setPhotoURL(reader.result as string);

@@ -9,6 +9,7 @@ interface AuthContextProps {
   entering: boolean;
   logout: () => Promise<void>;
   loginWithGoogle: () => Promise<void>;
+  loginWithEmail: (email: string, password: string) => Promise<void>;
   signUpWithEmailAndPassword: (user: any) => Promise<void>;
 }
 

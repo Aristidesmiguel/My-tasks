@@ -1,10 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { User, createUserWithEmailAndPassword, onAuthStateChanged, signInWithPopup, signOut } from 'firebase/auth';
+import { User, createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut } from 'firebase/auth';
+import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 import React, { useState, useEffect } from 'react';
+import { doc, getDoc, setDoc } from 'firebase/firestore';
 
-import { auth, googleProvider } from '../services/firebase';
+import { auth, db, googleProvider, storage } from '../services/firebase';
 import { AuthContext } from '../context';
-import { userDataBase } from '../server/user';
 
 
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
@@ -14,7 +15,6 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-            console.log("USER: ", currentUser)
             setUser(currentUser);
             setLoading(false);
             setEntering(false)
@@ -34,13 +34,58 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         }
     };
 
-    const signUpWithEmailAndPassword = async (user: { name: string, email: string, password: string, photoURL: string }) => {
+    const loginWithEmail = async (email: string, password: string): Promise<void> => {
+        return new Promise((resolve, reject) => {
+            try {
+                setEntering(true);
+                signInWithEmailAndPassword(auth, email, password)
+                    .then(async () => {
+                        const docRef = doc(db, "users", user?.uid ?? "");
+                        const docSnap = await getDoc(docRef);
+
+                        if (docSnap.exists()) {
+                            const userData = docSnap.data()
+                            localStorage.setItem('photoURL', userData.photoURL);
+                            localStorage.setItem('displayName', userData.displayName);
+                            if (location.hostname === 'localhost') {
+                                location.href = "http://localhost:5173/find-task";
+                            }
+                            resolve()
+                        } else {
+                            console.log("USER: ", user)
+                            reject();
+                        }
+
+                    })
+                    .catch(reject)
+                    .finally(() => setEntering(false))
+            } catch (error) {
+                console.error('Erro ao fazer login com Google:', error);
+                reject(error);
+            }
+        })
+    };
+
+    const signUpWithEmailAndPassword = async (user: { name: string, email: string, password: string, file: File }) => {
         try {
             setEntering(true)
             createUserWithEmailAndPassword(auth, user.email, user.password)
                 .then((currentUser) => {
-                    const newUser = { uid: currentUser.user.uid, email: currentUser.user.email, displayName: user.name, photoURL: user.photoURL }
-                    userDataBase.createUser(newUser)
+                    setEntering(true)
+                    const storageRef = ref(storage, `user_images/${user.file.name}`);
+                    uploadBytes(storageRef, user.file).then(() => {
+                        getDownloadURL(storageRef).then((url) => {
+                            const newUser = {
+                                uid: currentUser.user.uid,
+                                email: currentUser.user.email,
+                                displayName: user.name,
+                                photoURL: url
+                            };
+                            createUser(newUser);
+                        });
+                        //setEntering(false)
+
+                    });
                 })
 
         } catch (error) {
@@ -48,8 +93,20 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         }
     };
 
+    const createUser = async (user: any) => {
+        const docRef = doc(db, "users", user.uid);
+        setDoc(docRef, user)
+            .then(() => {
+                localStorage.setItem('photoURL', user.photoURL);
+                localStorage.setItem('displayName', user.displayName);
+                if (location.hostname === 'localhost') {
+                    location.href = "http://localhost:5173/find-task";
+                }
+            });
+    }
+
     return (
-        <AuthContext.Provider value={{ user, loading, entering, logout, loginWithGoogle, signUpWithEmailAndPassword }}>
+        <AuthContext.Provider value={{ user, loading, entering, logout, loginWithGoogle, signUpWithEmailAndPassword, loginWithEmail }}>
             {children}
         </AuthContext.Provider>
     );

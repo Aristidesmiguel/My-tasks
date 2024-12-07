@@ -18,7 +18,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { BsGoogle } from "react-icons/bs";
 import { useAuth } from "../../hooks";
 import { } from "firebase/auth";
-import { DashboardHeader, Menu } from "../../components";
+import { Menu } from "../../components";
 import "./style.css";
 import { useState } from "react";
 import { ToastStatus } from "../../utils";
@@ -31,9 +31,7 @@ export const SignIn = () => {
   const onCloseM = () => {
     setIsOpen(false);
   };
-  const onOpenM = () => {
-    setIsOpen(true);
-  };
+  
   
   const onChangeEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value)
@@ -43,7 +41,7 @@ export const SignIn = () => {
   }
 
 
-  const { loginWithGoogle, signUpWithEmailAndPassword, entering } = useAuth();
+  const { loginWithGoogle, loginWithEmail, entering } = useAuth();
 
   const handleLogin = async () => {
     try {
@@ -61,7 +59,7 @@ export const SignIn = () => {
 
   const onClickButton = async () => {
     /* createUser.resgistrarUser(email, password) */
-    signUpWithEmailAndPassword(email, password)
+    loginWithEmail(email, password)
       .then(() => showToast('Usuário(a), criado com sucesso', 'success'))
       .catch((error) => {
         console.error(error);
