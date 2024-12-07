@@ -15,7 +15,7 @@ const router = createBrowserRouter([
   },
   {
     path: ROUTES.tasks,
-    element: <Tasks />,
+    element: <ProtectedRoute><Tasks /></ProtectedRoute>,
   },
   {
     path: ROUTES.signIn,
@@ -30,11 +30,11 @@ const router = createBrowserRouter([
   },
   {
     path: ROUTES.addTasks,
-    element: <AddTasks />,
+    element: <ProtectedRoute><AddTasks /></ProtectedRoute>,
   },
   {
     path: ROUTES.editTasks,
-    element: <TasksEdit />,
+    element: <ProtectedRoute><TasksEdit /></ProtectedRoute>,
   },
 ]);
 
