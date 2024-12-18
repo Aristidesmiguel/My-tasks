@@ -29,11 +29,11 @@ export const DashboardHeader = ({ onOpen }: DashboardHeaderProps) => {
           <p>Add Task</p>
         </div>
       </div>
-      <Box display={"flex"} gap={3}>
+      <Box className="profileHeader"  display={"flex"} gap={3}>
         <Avatar src={user?.photoURL ?? photoURL ?? ""} />
         {/* <img id="foto_perfil" src="foto_perfil.PNG" alt="" /> */}
         <div className="perfile_info">
-          <h4>{user?.displayName ?? displayName}</h4>
+          <h4 >{user?.displayName ?? displayName}</h4>
           <p>
             <a href="#">My account</a>
             <img src="seta.png" alt="" />

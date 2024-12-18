@@ -1,5 +1,5 @@
 import { Avatar, Box, Button, Flex, FormControl, FormLabel, IconButton, Input, Text } from '@chakra-ui/react'
-import React, { useRef, useState } from 'react'
+import { useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useAuth } from '../../hooks'
 import { MdOutlineAddAPhoto } from 'react-icons/md'

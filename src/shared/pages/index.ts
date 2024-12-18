@@ -1,5 +1,5 @@
 export * from "./Home"
-export * from "./Tasks"
+export * from "./Profile"
 export * from "./SignIn"
 export * from "./SignUp"
 export * from "./Dashboard"

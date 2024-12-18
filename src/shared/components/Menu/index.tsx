@@ -18,7 +18,7 @@ export const Menu = () => {
           </Link>
         </div>
         <div className={menu.child_menu}>
-          <Link className={menu.link} to={ROUTES.home}>
+          <Link className={menu.link} to={ROUTES.profile}>
             <CgProfile />
             Profile
           </Link>

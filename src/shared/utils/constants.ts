@@ -6,7 +6,7 @@ export const COLLECTION_NAME = "tasks";
 
 export const ROUTES = {
     home: "/",
-    tasks: "/tasks",
+    profile: "/profile",
     signIn: "/sign-in",
     signUp: "/sign-up",
     dashboard: "/find-task",
@@ -19,6 +19,7 @@ export interface ITarefa {
     title: string
     isSelect: boolean
     data: string
+    uid?: string
 }
 
 

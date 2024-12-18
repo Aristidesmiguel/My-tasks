@@ -16,6 +16,7 @@ import addtasks from "./addTasks.module.css";
 import "./headerAddTasks.css";
 import dataBase from "../../server/bancoDeDados";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../hooks";
 
 export const chave = "listas";
 
@@ -27,6 +28,7 @@ export const AddTasks = () => {
   const [isOpenD, setIsOpenD] = useState(false);
   const [lista, setLista] = useState<ITarefa[]>([]);
   const [selectdDate, setSelectdDate] = useState('')
+  const { user } = useAuth();
   console.log(lista);
 
   const onCloseDrawer = () => {
@@ -53,7 +55,8 @@ export const AddTasks = () => {
         id: Date.now(),
         isSelect: false,
         title: title,
-        data: date
+        data: date,
+        uid: user?.uid
       };
 
       dataBase.salvarTarefa(task)

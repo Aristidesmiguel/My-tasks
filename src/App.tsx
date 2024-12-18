@@ -2,7 +2,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import "./App.css";
 
-import { Home, SignIn, Tasks, Dashboard, NotFound, AddTasks, TasksEdit, SignUp } from "./shared/pages";
+import { Home, SignIn, Profile, Dashboard, NotFound, AddTasks, TasksEdit, SignUp } from "./shared/pages";
 import { ROUTES } from "./shared/utils";
 import { ProtectedRoute } from "./shared/routes";
 import { AuthProvider } from "./shared/providers";
@@ -14,8 +14,8 @@ const router = createBrowserRouter([
     errorElement: <NotFound />,
   },
   {
-    path: ROUTES.tasks,
-    element: <ProtectedRoute><Tasks /></ProtectedRoute>,
+    path: ROUTES.profile,
+    element: <ProtectedRoute><Profile /></ProtectedRoute>,
   },
   {
     path: ROUTES.signIn,

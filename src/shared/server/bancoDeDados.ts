@@ -10,21 +10,7 @@ async function salvarTarefa(valorDoItem: ITarefa): Promise<string> {
 }
 
 async function editarTarefa(tarefaEditado: ITarefa) {
-  /* try {
-    const elementos = buscarTarefas(nomeDaChave);
-    if (!Array.isArray(elementos)) {
-      console.log('erro O retorno de buscarTarefas não é uma lista válida');
-      return;
-    }
-    const elementoEditado = elementos.map((item: ITarefa) => {
-      return item.id === tarefaEditado.id ? tarefaEditado : item;
-    });
 
-    localStorage.setItem(nomeDaChave, JSON.stringify(elementoEditado));
-  } catch (error) {
-    console.error('Erro ao editar a tarefa:' + error);
-
-  } */
   const ID = tarefaEditado.id;
   const docRef = doc(db, COLLECTION_NAME, ID)
   await updateDoc(docRef, {
