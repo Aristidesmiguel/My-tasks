@@ -99,17 +99,17 @@ export const SignIn = () => {
             </Text>
           </Box>
           <form action="" /* onSubmit={handleSubmit} */ style={{ width: 320 }}>
+            <Box display={'flex'} flexDir={'column'} gap={'2rem'}>
             <FormControl className="fromControl">
               <FormLabel >Email</FormLabel>
-              <Input value={email} onChange={onChangeEmail} />
-              {/* <FormHelperText>We'll never share your email.</FormHelperText> */}
+              <Input value={email} onChange={onChangeEmail} color={'white'} placeholder='Seu Email de Usuário(a)'/>
             </FormControl>
             <FormControl className="fromControl">
               <FormLabel>Password</FormLabel>
-              <Input type="password" value={password} onChange={onChangePassword} />
-              {/* <FormHelperText>We'll never share your email.</FormHelperText> */}
+              <Input type="password" value={password} onChange={onChangePassword} color={'white'} placeholder='Sua Senha de Usuário(a)'/>
             </FormControl>
-            <FormControl mt={5}>
+            </Box>
+            <FormControl mt={8} mb={8}>
               <Box display={'flex'} flexDir={'column'} alignItems={'center'} justifyContent={'space-around'} h={'120px'} >
                 <Button  isLoading={entering} onClick={onClickButton} bgColor={"#B4ACF9"} color={"none"} w={"20em"}>
                   Entrar

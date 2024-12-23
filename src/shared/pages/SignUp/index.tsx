@@ -56,6 +56,7 @@ export const SignUp = () => {
 
   return (
     <Box
+      overflow={"hidden"}
       h={"100vh"}
       display={"flex"}
       w={"100%"}
@@ -73,23 +74,22 @@ export const SignUp = () => {
             Criar conta
           </Text>
         </Box>
-        <form action="" /* onSubmit={handleSubmit} */ style={{ width: 320 }}>
-          <FormControl className="fromControl">
+        <form action="" style={{ width: 320 }}>
+          <Box  display={"flex"} flexDir={"column"}>
+          <FormControl marginBottom={'1rem'} className="fromControl">
             <FormLabel >Nome de usuário</FormLabel>
-            <Input value={userData.name} onChange={(e) => onChangeUserData("name", e.target.value)} />
-            {/* <FormHelperText>We'll never share your email.</FormHelperText> */}
+            <Input value={userData.name} onChange={(e) => onChangeUserData("name", e.target.value)} color={'white'} placeholder='Seu Nome de Usuário(a)'/>
           </FormControl>
-          <FormControl className="fromControl">
+          <FormControl marginBottom={'1rem'} className="fromControl">
             <FormLabel >Email</FormLabel>
-            <Input value={userData.email} onChange={(e) => onChangeUserData("email", e.target.value)} />
-            {/* <FormHelperText>We'll never share your email.</FormHelperText> */}
+            <Input value={userData.email} onChange={(e) => onChangeUserData("email", e.target.value)} color={'white'} placeholder='Seu Email de Usuário(a)'/>
           </FormControl>
-          <FormControl className="fromControl">
+          <FormControl marginBottom={'1rem'} className="fromControl">
             <FormLabel>Password</FormLabel>
-            <Input type="password" value={userData.password} onChange={(e) => onChangeUserData("password", e.target.value)} />
-            {/* <FormHelperText>We'll never share your email.</FormHelperText> */}
+            <Input type="password" value={userData.password} onChange={(e) => onChangeUserData("password", e.target.value)} color={'white'} placeholder='Sua Senha de Usuário(a)'/>
           </FormControl >
-          <FormControl mt={8}>
+          </Box>  
+          <FormControl display={'flex'} justifyContent={'center'} alignItems={'center'} >
             <input type="file" name="" onChange={onChooseImage} ref={inputRef} accept="image/*" hidden id="" />
             {
               photoURL ?

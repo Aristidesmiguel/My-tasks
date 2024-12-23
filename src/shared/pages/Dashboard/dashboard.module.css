@@ -1,5 +1,4 @@
-.container_dashboard_main {
-    height: 89vh;
+.container_dashboard_main {   
     display: flex;
     justify-content: center;
     color: white;

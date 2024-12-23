@@ -17,12 +17,13 @@ import {
 } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 
-import { DashboardHeader, Menu } from "../../components";
+import { DashboardHeader, Menu, TaskItem } from "../../components";
 import { collection, getDocs, query } from "firebase/firestore";
 import dashboardCss from "./dashboard.module.css";
 import dataBase from "../../server/bancoDeDados";
 import { COLLECTION_NAME, ITarefa, ToastStatus } from "../../utils";
 import { db } from "../../services/firebase";
+import { useAuth } from "../../hooks";
 
 export const Dashboard = () => {
   const [isOpenM, setIsOpen] = useState(false);
@@ -32,6 +33,10 @@ export const Dashboard = () => {
   const [value, setValue] = useState('')
   const [selectedTaskId, setSelectedTaskId] = useState<string | null>(null);
   const [isDeleting, setIsDeleting] = useState(false);
+
+  const { user } = useAuth()
+  const userId = user?.uid
+
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setValue(e.target.value)
   }
@@ -119,8 +124,10 @@ export const Dashboard = () => {
     setTasks(newTasks)
   };
   useEffect(() => {
-    dataBase.buscarTarefas().then((tasks) => setTasks(tasks));
-  }, []);
+   if (userId){
+      dataBase.buscarTarefas(userId).then((tasks) => setTasks(tasks));
+   }
+  }, [userId]);
 
   const toast = useToast();
   const showToast = (title: string, status: ToastStatus) => {
@@ -189,43 +196,7 @@ export const Dashboard = () => {
                 <div id="myList" className={dashboardCss.tasks}>
                   <ul>
                     {tasks.filter(task => task.title?.toLocaleLowerCase().includes(value.toLocaleLowerCase())).map((task) => (
-                      <div key={task.id}>
-                        <div
-
-                          id="list"
-                          className={dashboardCss.tasksCreated}
-                          key={task.id}
-                        >
-                          <div className={dashboardCss.contanerFlex}>
-                            <div className={dashboardCss.info}>
-                              <input
-                                checked={task.isSelect}
-                                onClick={() => handleToggleComplete(task)}
-                                type="checkbox"
-                              />
-                              <li
-                                style={{
-                                  textDecoration: task.isSelect
-                                    ? "line-through"
-                                    : "none",
-                                  listStyle: "none",
-                                }}
-                              >
-                                {task.title}
-                              </li>
-                            </div>
-                            <span style={{ color: '#b4acf9', fontSize: '10px' }}>{task.data}</span>
-                          </div>
-                          <img
-                            onClick={() => onOpenD()}
-                            style={{
-                              display: task.isSelect ? "block" : "none",
-                            }}
-                            src="delete.png"
-                            alt="Botão de apagar tarefa"
-                          />
-                        </div>
-                      </div>
+                      <TaskItem handleToggleComplete={() => handleToggleComplete(task)} onOpenD={onOpenD} task={task} />
                     ))}
                   </ul>
                 </div>

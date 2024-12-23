@@ -59,12 +59,16 @@ export const AddTasks = () => {
         uid: user?.uid
       };
 
-      dataBase.salvarTarefa(task)
-        .then(() => {
-          setLista((newTasks) => [...newTasks, task]);
-          showToast("Tarefa Criada Com Sucesso", 'success');
+        toast.promise(dataBase.salvarTarefa(task).then(() => {setLista((newTasks) => [...newTasks, task])}), {
+          success: {
+            title: "Tarefa criada com sucesso",
+            //position: "top-right"
+          },
+          error: {
+            title: "A tarefa não foi criada",
+          },
+          loading: { title: "Atualizando...", position: "top-right" },
         })
-        .catch(() => showToast("Erro ao salvar a tarefa", 'error'));
     }
   };
 

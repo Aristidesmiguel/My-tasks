@@ -1,7 +1,7 @@
-import { addDoc, collection, deleteDoc, getDocs, query, doc, updateDoc } from "firebase/firestore";
+import { addDoc, collection, deleteDoc, getDocs, query, doc, updateDoc, where } from "firebase/firestore";
 import { COLLECTION_NAME, ITarefa } from "../utils";
 import { db } from "../services/firebase";
-import { useAuth } from "../hooks";
+
 
 
 
@@ -32,14 +32,8 @@ async function removeTarefa(id: string) {
 
 }
 
-async function buscarTarefas(): Promise<ITarefa[]> {
-
-  const { user } = useAuth()
-  if (!user) {
-    return []
-  }
-  const idUser = user.uid
-  const q = query(collection(db, COLLECTION_NAME, idUser, "users"));
+async function buscarTarefas(userId: string): Promise<ITarefa[]> {
+  const q = query(collection(db, COLLECTION_NAME), where("uid", "==", userId));
   const tasks = [] as ITarefa[]
 
   const querySnapshot = await getDocs(q);

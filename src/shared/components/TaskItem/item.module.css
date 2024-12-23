@@ -1,0 +1,45 @@
+.tasksCreated{
+    padding: 15px;
+    width: 100%;
+    height: 60px;
+    border-radius: 10px;
+    background-color: #363041;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.267);
+}
+
+.img {
+    background: none;
+}
+.info{
+    background: none;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+p{
+    background: none;
+}
+
+
+.info input[type="checkbox"] {
+    scale: 1.2;
+}
+ 
+.info input[type="checkbox"]:checked {
+    transition:0.5s;
+    background-color: black;
+}
+
+input[type="checkbox"]:checked  {
+    background-color: #b4acf9;
+}
+
+.contanerFlex {
+    justify-content: center;
+}

@@ -15,6 +15,7 @@ import { FaRegEdit } from "react-icons/fa";
 import editTasks from "./EditTasks.module.css";
 import dataBase from "../../server/bancoDeDados";
 import { ITarefa, ToastStatus } from "../../utils";
+import { useAuth } from "../../hooks";
 
 export const TasksEdit = () => {
   const [isOpenM, setIsOpen] = useState(false);
@@ -28,9 +29,15 @@ export const TasksEdit = () => {
   const onOpenM = () => {
     setIsOpen(true);
   };
+
+  const { user } = useAuth();
+  const userId = user?.uid;
+
   useEffect(() => {
-    dataBase.buscarTarefas().then((tasks) => setTasks(tasks));
-  }, []);
+    if (userId) {
+      dataBase.buscarTarefas(userId).then((tasks) => setTasks(tasks));
+    }
+  }, [userId]);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value);
@@ -76,8 +83,6 @@ export const TasksEdit = () => {
   }
 
   const mainFunction = () => {
-
-
     toast.promise(onEditTask(), {
       success: {
         title: "Tarefa atualizada com sucesso",
@@ -88,12 +93,6 @@ export const TasksEdit = () => {
       },
       loading: { title: "Atualizando...", position: "top-right" },
     })
-    /* dataBase.editarTarefa(chave, updatedTask)
-      .then(() => showToast("Tarefa atualizada com sucesso", 'success'))
-      .catch((error) => {
-        console.error(error);
-        showToast("A tarefa não foi atualizada", 'warning')
-      }) */
 
   };
 
