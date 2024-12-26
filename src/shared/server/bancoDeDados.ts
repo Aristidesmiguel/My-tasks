@@ -3,8 +3,6 @@ import { COLLECTION_NAME, ITarefa } from "../utils";
 import { db } from "../services/firebase";
 
 
-
-
 async function salvarTarefa(valorDoItem: ITarefa): Promise<string> {
   const docRef = await addDoc(collection(db, COLLECTION_NAME), valorDoItem);
   return docRef.id;
@@ -12,7 +10,7 @@ async function salvarTarefa(valorDoItem: ITarefa): Promise<string> {
 
 async function editarTarefa(tarefaEditado: ITarefa) {
 
-  const ID = tarefaEditado.id;
+  const ID = tarefaEditado.id as string
   const docRef = doc(db, COLLECTION_NAME, ID)
   await updateDoc(docRef, {
     ...tarefaEditado,
@@ -20,7 +18,7 @@ async function editarTarefa(tarefaEditado: ITarefa) {
     title: tarefaEditado.title,
   })
 }
-async function isCompled(id: string | number, value: boolean) {
+async function isCompled(id: string, value: boolean) {
   const docRef = doc(db, COLLECTION_NAME, id)
   await updateDoc(docRef, { isSelect: value })
 }

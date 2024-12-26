@@ -39,3 +39,26 @@ li a {
 li a:hover{
   color: #b4acf9;
 }
+
+@media screen and (min-width: 280px) and (max-width:359px) {
+  .navbar {
+    display: none;
+  }
+}
+@media screen and (min-width: 360px) and (max-width:481px) {
+  .navbar {
+    display: none;
+  }
+}
+@media screen and (min-width: 481px) and (max-width:768px) {
+  .navbar {
+    display: none;
+  }
+}
+@media screen and (min-width: 768px) and (max-width:1024px) {
+  .navbar .title {
+    font-size: 20px;
+    font-weight: 700;
+    width: 20vw;
+  }
+}

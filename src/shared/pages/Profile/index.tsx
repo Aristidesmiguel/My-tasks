@@ -3,11 +3,28 @@ import { Avatar, Flex, Box, Text, Button, Drawer, DrawerOverlay, DrawerContent, 
 import './profileHeaderTest.css'
 
 import profile from "./profile.module.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useAuth } from "../../hooks";
+import { ITarefa } from "../../utils";
+import dataBase from "../../server/bancoDeDados";
 
 export const Profile = () => {
   const [isOpen, setIsOpen] = useState(false)
+  const [taskTotal, setCompletedTasks] = useState(0)
+  const [taks , setTasks] = useState<ITarefa[]>([])
+
+  const { user } = useAuth();
+
+  const userId = user?.uid
+
+  useEffect(() => {
+    if (userId) {
+      dataBase.buscarTarefas(userId)
+        .then((tak) => setTasks(tak))
+        setCompletedTasks(taks.filter(task => task.isSelect).length);
+    }
+  })
+
 
   const onClose = () => {
     setIsOpen(false)
@@ -16,7 +33,7 @@ export const Profile = () => {
     setIsOpen(true)
   }
 
-  const { user } = useAuth();
+  
   const photoURL = localStorage.getItem('photoURL')
   const displayName = localStorage.getItem('displayName')
 
@@ -44,7 +61,7 @@ export const Profile = () => {
           >
             <Flex flexDir={'column'} align={'center'} justify={'center'}>
               <Text>TOTAL DE TAREFAS</Text>
-              <Text color={'#B4ACF9'} fontSize={'2.5rem'}>10</Text>
+              <Text color={'#B4ACF9'} fontSize={'2.5rem'}>{ taks.length }</Text>
             </Flex>
           </Box>
           <Box
@@ -60,7 +77,7 @@ export const Profile = () => {
           >
             <Flex flexDir={'column'} align={'center'} justify={'center'}>
               <Text>TAREFAS COMPLETAS</Text>
-              <Text color={'#B4ACF9'} fontSize={'2.5rem'}>3</Text>
+              <Text color={'#B4ACF9'} fontSize={'2.5rem'}>{taskTotal}</Text>
             </Flex>
           </Box>
         </Box>

@@ -102,3 +102,12 @@ h4{
     
     color: #b4acf9;
 }
+
+@media screen and (max-width: 768px){
+    .createTaskInput{
+        width: 90vw;
+    }
+    .contaner .title_main h1{
+        font-size: 1rem;
+    }
+}

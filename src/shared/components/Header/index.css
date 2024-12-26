@@ -41,3 +41,40 @@
 p a{
     color: #B4ACF9;  
 }
+
+@media screen and (min-width: 280px) and (max-width:359px) {
+    #cabeca{ 
+        display: flex;
+        justify-content: space-between;
+    }
+    .addTasks {
+        width: auto;
+    }
+    .perfile_info{
+        display: none;
+    }
+}
+@media screen and (min-width: 360px) and (max-width:481px) {
+    #cabeca{ 
+        display: flex;
+        justify-content: space-between;
+    }
+    .addTasks {
+        width: auto;
+    }
+    .perfile_info{
+        display: none;
+    }
+}
+@media screen and (min-width: 481px) and (max-width:768px) {
+    #cabeca{ 
+        display: flex;
+        justify-content: space-between;
+    }
+    .addTasks {
+        width: auto;
+    }
+    .perfile_info{
+        display: none;
+    }
+}

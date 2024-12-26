@@ -116,3 +116,52 @@ p{
 .contanerFlex {
  justify-content: center;
 }
+
+@media screen and (min-width: 280px) and (max-width:359px) {
+    .container_dashboard_main {
+        padding: 10px;
+    }
+    .createTaskInput {
+        width: 90vw;
+    }
+    .title_main {
+        margin-left: 20px;
+    }
+}
+@media screen and (min-width: 360px) and (max-width:481px) {
+    .container_dashboard_main {
+        padding: 10px;
+    }
+    .createTaskInput {
+        width: 90vw;
+    }
+    .title_main {
+        margin-left: 20px;
+    }
+}
+@media screen and (min-width: 481px) and (max-width:768px) {
+    .container_dashboard_main {
+        padding: 10px;
+    }
+    .createTaskInput {
+        width: 90vw;
+    }
+    .title_main {
+        margin-left: 20px;
+    }
+}
+@media screen and (min-width: 768px) and (max-width:1024px) {
+    .container_dashboard_main {
+        padding: 10px;
+    }
+    .createTaskInput {
+        width: 90vw;
+    }
+    .title_main {
+        margin-left: 20px;
+        font-size: 1.5rem;
+    }
+    .createTaskInput input[type="text"]::placeholder{
+        font-size: 1.5rem;
+    }
+}

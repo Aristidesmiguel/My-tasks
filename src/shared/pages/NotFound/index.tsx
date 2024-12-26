@@ -1,7 +1,9 @@
-import { Button } from "../../components"
+import { Link } from "react-router-dom"
 import "./notFound.css"
+import { ROUTES } from "../../utils"
 
 export const NotFound = () => {
+    
     return (
         <>
         <div id="prin">
@@ -11,9 +13,10 @@ export const NotFound = () => {
                 <p>Página não encontrada</p>
             </div>
             <div className="subTitle">
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat recusandae obcaecati amet, <br /> exercitationem nemo doloremque dolorum quam non illo. Cum iste impedit quidem quis repudiandae! <br /> Nihil culpa nam placeat minus? Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit, <br /> doloribus voluptates odio earum quo veritatis hic dolores quas aperiam aspernatur nesciunt <br /> modi suscipit architecto soluta porro? Quo fugiat veritatis voluptatem?</p>
+                <p>Desculpe, a página que você está procurando não existe.</p>
+                <p>Você pode voltar para a página inicial clicando no botão abaixo.</p>
             </div>
-            <Button title="Voltar" />
+            <Link to={ROUTES.home} className="link_Voltar">Voltar</Link>
         </div>
         </>
     )

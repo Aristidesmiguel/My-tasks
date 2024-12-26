@@ -93,3 +93,185 @@ label{
 .buttons button:nth-child(2):hover{
     background: #463d57;
 }
+
+@media screen and (min-width: 280px) and (max-width:359px){
+    .addTasksMain {
+        width: 80vw;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .corpo{
+        width: 80vw;
+    }
+    .tesks input{
+        width: 70vw;
+    }
+    .buttons button{
+        width: 70vw;
+    }
+    .title {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+    .title img{
+        background-color: #363041;
+        padding: 5px;
+        border-radius: 50%;
+        cursor: pointer;
+        text-align: center;
+    }
+    .subtitle {
+        text-align: center;
+    }
+    .tesks {
+        display: flex;
+        flex-direction: column;
+        margin-left: 0px;
+    }
+    .buttons button {
+        margin-bottom: 10px;
+        width: 70vw;
+        margin-left: 0px;
+    }
+}
+@media screen and (min-width: 360px) and (max-width:481px){
+    .addTasksMain {
+        width: 80vw;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .corpo{
+        width: 80vw;
+    }
+    .tesks input{
+        width: 70vw;
+    }
+    .buttons button{
+        width: 70vw;
+    }
+    .title {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+    .title img{
+        background-color: #363041;
+        padding: 5px;
+        border-radius: 50%;
+        cursor: pointer;
+        text-align: center;
+    }
+    .subtitle {
+        text-align: center;
+    }
+    .tesks {
+        display: flex;
+        flex-direction: column;
+        margin-left: 0px;
+    }
+    .buttons button {
+        margin-bottom: 10px;
+        width: 70vw;
+        margin-left: 0px;
+    }
+}
+@media screen and (min-width: 481px) and (max-width:768px){
+    .addTasksMain {
+        width: 80vw;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .corpo{
+        width: 80vw;
+    }
+    .tesks input{
+        width: 70vw;
+    }
+    .buttons button{
+        width: 70vw;
+    }
+    .title {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+    .title img{
+        background-color: #363041;
+        padding: 5px;
+        border-radius: 50%;
+        cursor: pointer;
+        text-align: center;
+    }
+    .subtitle {
+        text-align: center;
+    }
+    .tesks {
+        display: flex;
+        flex-direction: column;
+        margin-left: 0px;
+    }
+    .buttons button {
+        margin-bottom: 10px;
+        width: 70vw;
+        margin-left: 0px;
+    }
+}
+@media screen and (min-width: 768px) and (max-width:1024px){
+    .addTasksMain {
+        width: 80vw;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .corpo{
+        width: 80vw;
+    }
+    .tesks input{
+        width: 70vw;
+        padding: 30px;
+        font-size: 1.2rem;
+    }
+    .buttons button{
+        width: 70vw;
+    }
+    .title {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+    
+    .subtitle h1 {
+        font-size: 3rem;
+    }
+    .subtitle p {
+        font-size: 1.5rem;
+    }
+    .title img{
+        background-color: #363041;
+        padding: 25px;
+        border-radius: 50%;
+        cursor: pointer;
+        text-align: center;
+    }
+    .subtitle {
+        text-align: center;
+    }
+    .tesks {
+        display: flex;
+        flex-direction: column;
+        margin-left: 0px;
+    }
+    .buttons button {
+        margin-bottom: 10px;
+        width: 70vw;
+        margin-left: 0px;
+    }
+}

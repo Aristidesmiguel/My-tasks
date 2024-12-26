@@ -77,6 +77,7 @@ export const TasksEdit = () => {
             : task
         )
       );
+      setInputValue("");
     } else {
       showToast("A tarefa não foi atualizada", 'warning');
     }
@@ -96,7 +97,7 @@ export const TasksEdit = () => {
 
   };
 
-  const handleTaskClick = (value: string, id: number | string) => {
+  const handleTaskClick = (value: string, id: string) => {
     setInputValue(value);
     setSelectedTaskId(id);
   };

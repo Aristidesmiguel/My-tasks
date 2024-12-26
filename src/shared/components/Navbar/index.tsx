@@ -1,9 +1,17 @@
+import { useNavigate } from "react-router-dom";
 import { Button } from "../Button";
 import "./navbar.css";
+import { ROUTES } from "../../utils";
 
 export const Navbar = () => {
+  const navigate = useNavigate();
+  const handleOnCkick = () => {
+    navigate(ROUTES.signIn);  
+  }
+ 
   return (
-    <div className="navbar">
+    <>
+      <div className="navbar">
       <a href="#" className="title">
         <span className="active">
           Task <strong>Manager</strong>
@@ -23,7 +31,8 @@ export const Navbar = () => {
           <a href="/Resource">Resource</a>
         </li>
       </ul>
-      <Button title="Sign In" />
+      <Button title="Sign In" handleClickButton={handleOnCkick} />
     </div>
+    </>
   );
 };
