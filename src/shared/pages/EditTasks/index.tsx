@@ -34,6 +34,7 @@ export const TasksEdit = () => {
   const userId = user?.uid;
 
   useEffect(() => {
+    document.title = "Editar Tarefas";
     if (userId) {
       dataBase.buscarTarefas(userId).then((tasks) => setTasks(tasks));
     }

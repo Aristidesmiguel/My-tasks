@@ -124,6 +124,7 @@ export const Dashboard = () => {
     setTasks(newTasks)
   };
   useEffect(() => {
+    document.title = "Minhas Tarefas";
    if (userId){
       dataBase.buscarTarefas(userId).then((tasks) => setTasks(tasks));
    }

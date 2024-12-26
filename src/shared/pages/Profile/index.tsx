@@ -18,6 +18,7 @@ export const Profile = () => {
   const userId = user?.uid
 
   useEffect(() => {
+    document.title = "Perfil"
     if (userId) {
       dataBase.buscarTarefas(userId)
         .then((tak) => setTasks(tak))

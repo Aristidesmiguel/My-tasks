@@ -20,7 +20,7 @@ import { useAuth } from "../../hooks";
 import { } from "firebase/auth";
 import { Menu } from "../../components";
 import "./style.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ToastStatus } from "../../utils";
 export const SignIn = () => {
   const navigate = useNavigate();
@@ -32,7 +32,10 @@ export const SignIn = () => {
     setIsOpen(false);
   };
   
-  
+  useEffect(() => {
+    document.title = "Entrar"
+  })
+
   const onChangeEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value)
   }

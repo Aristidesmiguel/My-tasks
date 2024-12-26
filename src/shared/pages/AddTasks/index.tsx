@@ -7,7 +7,7 @@ import {
   DrawerOverlay,
   useToast,
 } from "@chakra-ui/react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import { DashboardHeader, Button, Menu } from "../../components";
 import { ITarefa, ROUTES, ToastStatus } from "../../utils";
@@ -29,7 +29,11 @@ export const AddTasks = () => {
   const [lista, setLista] = useState<ITarefa[]>([]);
   const [selectdDate, setSelectdDate] = useState('')
   const { user } = useAuth();
-  console.log(lista);
+  const userId = user?.uid
+
+  useEffect(() => {
+    document.title = "Criar Tarefa"
+  })
 
   const onCloseDrawer = () => {
     setIsOpenD(false);
@@ -52,17 +56,16 @@ export const AddTasks = () => {
       showToast("Tarefa Já Existe", 'info');
     } else {
       const task: ITarefa = {
-        id: Date.now(),
+        id: Date.now().toString(),
         isSelect: false,
         title: title,
         data: date,
-        uid: user?.uid
+        uid: userId
       };
 
         toast.promise(dataBase.salvarTarefa(task).then(() => {setLista((newTasks) => [...newTasks, task])}), {
           success: {
             title: "Tarefa criada com sucesso",
-            //position: "top-right"
           },
           error: {
             title: "A tarefa não foi criada",

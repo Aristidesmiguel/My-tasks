@@ -4,7 +4,7 @@ import { ROUTES } from "../../utils";
 
 import home from "./home.module.css";
 import { Drawer, DrawerBody, DrawerCloseButton, DrawerContent, DrawerHeader, DrawerOverlay } from "@chakra-ui/react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export const Home = () => {
   const [isOpen, setIsOpen] = useState(false)
@@ -21,6 +21,10 @@ export const Home = () => {
   const onClickButton = () => {
     navigate(ROUTES.dashboard);
   };
+
+  useEffect(() => {
+    document.title = "Home";
+  })
 
   const onClickOnSingIn = () => {
     navigate(ROUTES.signIn)
