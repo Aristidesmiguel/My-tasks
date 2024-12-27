@@ -49,7 +49,8 @@ export const SignIn = () => {
   const handleLogin = async () => {
     try {
       await loginWithGoogle();
-      navigate("/find-task");
+      const baseUrl = window.location.origin;
+      navigate(`${baseUrl}/find-task`);
     } catch (error) {
       console.error("Erro no login:", error);
     }
