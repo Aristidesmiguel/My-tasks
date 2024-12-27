@@ -35,7 +35,7 @@ export const DashboardHeader = ({ onOpen }: DashboardHeaderProps) => {
         <div className="perfile_info">
           <h4 >{user?.displayName ?? displayName}</h4>
           <p>
-            <a href="#">My account</a>
+            <a href={ROUTES.profile}>My account</a>
             <img src="seta.png" alt="" />
           </p>
         </div>
