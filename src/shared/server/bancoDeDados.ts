@@ -8,7 +8,7 @@ async function salvarTarefa(valorDoItem: ITarefa): Promise<string> {
   return docRef.id;
 }
 
-async function editarTarefa(tarefaEditado: ITarefa) {
+async function editarTarefa(tarefaEditado: ITarefa): Promise<void> {
 
   const ID = tarefaEditado.id as string
   const docRef = doc(db, COLLECTION_NAME, ID)
@@ -18,12 +18,12 @@ async function editarTarefa(tarefaEditado: ITarefa) {
     title: tarefaEditado.title,
   })
 }
-async function isCompled(id: string, value: boolean) {
+async function isCompled(id: string, value: boolean): Promise<void> {
   const docRef = doc(db, COLLECTION_NAME, id)
   await updateDoc(docRef, { isSelect: value })
 }
 
-async function removeTarefa(id: string) {
+async function removeTarefa(id: string): Promise<string> {
   const docRef = doc(db, COLLECTION_NAME, id);
   await deleteDoc(docRef);
   return docRef.id
