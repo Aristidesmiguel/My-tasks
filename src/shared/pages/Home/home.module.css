@@ -160,7 +160,7 @@ section img, a {
     position: relative;
   }
   .menu {
-    display: block;
+    display:  none;
   }
   aside{
     padding: 10px;

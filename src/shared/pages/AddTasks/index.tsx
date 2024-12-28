@@ -117,7 +117,7 @@ export const AddTasks = () => {
                 </a>
               </div>
               <div className={addtasks.subtitle}>
-                <h1>Add tasks</h1>
+                <h1>Adicionar tarefa</h1>
                 <p>Adiciona suas tarefas aqui</p>
               </div>
             </div>

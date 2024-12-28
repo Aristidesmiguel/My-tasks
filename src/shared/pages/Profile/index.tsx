@@ -11,9 +11,10 @@ import dataBase from "../../server/bancoDeDados";
 export const Profile = () => {
   const [isOpen, setIsOpen] = useState(false)
   const [taskTotal, setCompletedTasks] = useState(0)
+  const [noCompleted, setnoCompleted] = useState(0)
   const [taks , setTasks] = useState<ITarefa[]>([])
 
-  const { user } = useAuth();
+  const { user, logout } = useAuth();
 
   const userId = user?.uid
 
@@ -23,8 +24,11 @@ export const Profile = () => {
       dataBase.buscarTarefas(userId)
         .then((tak) => setTasks(tak))
         setCompletedTasks(taks.filter(task => task.isSelect).length);
+        setnoCompleted(taks.filter(task => !task.isSelect).length);
     }
   })
+
+  
 
 
   const onClose = () => {
@@ -77,13 +81,29 @@ export const Profile = () => {
             fontWeight={'bold'}
           >
             <Flex flexDir={'column'} align={'center'} justify={'center'}>
-              <Text>TAREFAS COMPLETAS</Text>
+              <Text>TAREFAS CONCLUÍDAS</Text>
               <Text color={'#B4ACF9'} fontSize={'2.5rem'}>{taskTotal}</Text>
+            </Flex>
+          </Box>
+          <Box
+          className={profile.container_info}
+            w={"200px"}
+            h={"200px"}
+            bgColor={"#363041"}
+            borderRadius={"10px"}
+            display={'flex'}
+            alignItems={'center'}
+            justifyContent={'center'}
+            fontWeight={'bold'}
+          >
+            <Flex flexDir={'column'} align={'center'} justify={'center'}>
+              <Text>NÃO CONCLUÍDAS</Text>
+              <Text color={'#B4ACF9'} fontSize={'2.5rem'}>{noCompleted}</Text>
             </Flex>
           </Box>
         </Box>
         <Box>
-            <Button className={profile.button} >Sair</Button>
+            <Button className={profile.button} onClick={logout}>Sair</Button>
         </Box>
       </Box>
       <Drawer placement="left" onClose={onClose} isOpen={isOpen}>

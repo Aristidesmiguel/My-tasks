@@ -26,7 +26,7 @@ export const DashboardHeader = ({ onOpen }: DashboardHeaderProps) => {
 
         <div className="addTasks">
           <img onClick={onClickButton} src="add.png" alt="" />
-          <p>Add Task</p>
+          <p>Criar Tarefa</p>
         </div>
       </div>
       <Box className="profileHeader"  display={"flex"} gap={3}>

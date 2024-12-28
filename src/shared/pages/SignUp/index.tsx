@@ -33,6 +33,14 @@ export const SignUp = () => {
     setUserData({ ...userData, [key]: value })
   }
 
+  const onClickButton = () => {
+      if (userData.email === "" || userData.name === "" || userData.password === "" || userData.file === undefined) {
+        return
+      } else {
+        onSubmit()
+      }
+  }
+
 
   const onSubmit = async () => {
     //console.log(userData)
@@ -82,15 +90,15 @@ export const SignUp = () => {
           <Box  display={"flex"} flexDir={"column"}>
           <FormControl marginBottom={'1rem'} className="fromControl">
             <FormLabel >Nome de usuário</FormLabel>
-            <Input value={userData.name} onChange={(e) => onChangeUserData("name", e.target.value)} color={'white'} placeholder='Seu Nome de Usuário(a)'/>
+            <Input value={userData.name} onChange={(e) => onChangeUserData("name", e.target.value)} color={'white'} />
           </FormControl>
           <FormControl marginBottom={'1rem'} className="fromControl">
             <FormLabel >Email</FormLabel>
-            <Input value={userData.email} onChange={(e) => onChangeUserData("email", e.target.value)} color={'white'} placeholder='Seu Email de Usuário(a)'/>
+            <Input value={userData.email} onChange={(e) => onChangeUserData("email", e.target.value)} color={'white'} />
           </FormControl>
           <FormControl marginBottom={'1rem'} className="fromControl">
             <FormLabel>Password</FormLabel>
-            <Input type="password" value={userData.password} onChange={(e) => onChangeUserData("password", e.target.value)} color={'white'} placeholder='Sua Senha de Usuário(a)'/>
+            <Input type="password" value={userData.password} onChange={(e) => onChangeUserData("password", e.target.value)} color={'white'} />
           </FormControl >
           </Box>  
           <FormControl display={'flex'} justifyContent={'center'} alignItems={'center'} >
@@ -115,7 +123,7 @@ export const SignUp = () => {
           </FormControl>
           <FormControl mt={5}>
             <Box display={'flex'} flexDir={'column'} alignItems={'center'} justifyContent={'space-around'} h={'120px'} >
-              <Button isLoading={entering} onClick={onSubmit} bgColor={"#B4ACF9"} color={"none"} w={"20em"}>
+              <Button isLoading={entering} onClick={onClickButton} bgColor={"#B4ACF9"} color={"none"} w={"20em"}>
                 Criar
               </Button>
               <Box display={"flex"} alignItems={"center"} justifyContent={"space-between"}>

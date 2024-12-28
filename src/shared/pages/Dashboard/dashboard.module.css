@@ -159,9 +159,9 @@ p{
     }
     .title_main {
         margin-left: 20px;
-        font-size: 1.5rem;
+        font-size: 1rem;
     }
     .createTaskInput input[type="text"]::placeholder{
-        font-size: 1.5rem;
+        font-size: 1rem;
     }
 }

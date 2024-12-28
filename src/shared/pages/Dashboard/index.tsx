@@ -172,10 +172,9 @@ export const Dashboard = () => {
         <main>
           <div className={dashboardCss.contaner}>
             <div className={dashboardCss.title_main}>
-              <h1>My Tasks</h1>
+              <h1>Minhas Tarefas</h1>
               <p>
-                Register your tasks and have a better monitoring of your
-                activities
+              Cadastre suas tarefas e tenha um melhor acompanhamento de suas atividades
               </p>
             </div>
 
@@ -192,7 +191,7 @@ export const Dashboard = () => {
               </div>
               <div className={dashboardCss.tasks_container}>
                 <div className={dashboardCss.title_main}>
-                  <h3>{" Tasks - " + tasks.length}</h3>
+                  <h3>{" Tarefas - " + tasks.length}</h3>
                 </div>
                 <div id="myList" className={dashboardCss.tasks}>
                   <ul>

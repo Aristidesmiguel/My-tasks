@@ -235,11 +235,7 @@ label{
     }
     .tesks input{
         width: 70vw;
-        padding: 30px;
         font-size: 1.2rem;
-    }
-    .buttons button{
-        width: 70vw;
     }
     .title {
         display: flex;

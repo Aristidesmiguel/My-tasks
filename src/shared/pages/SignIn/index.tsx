@@ -55,13 +55,15 @@ export const SignIn = () => {
     }
   };
 
-  /* const handleSubmit = async (e: { preventDefault: () => void; }) => {
-    e.preventDefault();
-    await handleLogin()
-  }; */
+  const onClickButton = () => {
+    if (email === "" || password === "") {
+      showToast('Campo vazio', 'info')
+    } else {
+      login()
+    }
+  }
 
-  const onClickButton = async () => {
-    /* createUser.resgistrarUser(email, password) */
+  const login = async () => {
     loginWithEmail(email, password)
       .then(() => showToast('Usuário(a) encontrado', 'success'))
       .catch((error) => {
@@ -105,11 +107,11 @@ export const SignIn = () => {
             <Box display={'flex'} flexDir={'column'} gap={'2rem'}>
             <FormControl className="fromControl">
               <FormLabel >Email</FormLabel>
-              <Input value={email} onChange={onChangeEmail} color={'white'} placeholder='Seu Email de Usuário(a)'/>
+              <Input value={email} onChange={onChangeEmail} color={'white'}/>
             </FormControl>
             <FormControl className="fromControl">
               <FormLabel>Password</FormLabel>
-              <Input type="password" value={password} onChange={onChangePassword} color={'white'} placeholder='Sua Senha de Usuário(a)'/>
+              <Input type="password" value={password} onChange={onChangePassword} color={'white'}/>
             </FormControl>
             </Box>
             <FormControl mt={8} mb={8}>

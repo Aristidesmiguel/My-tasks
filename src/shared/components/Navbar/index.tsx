@@ -21,14 +21,11 @@ export const Navbar = () => {
       <ul>
         <li>
           <a href="/about" className="active">
-            About
+          Sobre
           </a>
         </li>
         <li>
-          <a href="/cases">Cases</a>
-        </li>
-        <li>
-          <a href="/Resource">Resource</a>
+          <a href="/cases">Contacto</a>
         </li>
       </ul>
       <Button title="Sign In" handleClickButton={handleOnCkick} />

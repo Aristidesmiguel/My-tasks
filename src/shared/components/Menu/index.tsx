@@ -20,7 +20,7 @@ export const Menu = () => {
         <div className={menu.child_menu}>
           <Link className={menu.link} to={ROUTES.profile}>
             <CgProfile />
-            Profile
+            Perfil
           </Link>
         </div>
         <div className={menu.child_menu}>
@@ -42,11 +42,7 @@ export const Menu = () => {
           </Link>
         </div>
       </div>
-      <div className={menu.redesSocial}>
-        <div>
-          <img src="facebook.png" alt="" />
-        </div>
-      </div>
+
     </div>
   );
 };

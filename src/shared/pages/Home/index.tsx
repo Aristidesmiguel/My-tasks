@@ -40,10 +40,10 @@ export const Home = () => {
       <main className={home.main}>
         <aside>
           <h1>
-            <span className="active">Creative Digital</span> Design Agency is
-            looking for new talent
+            <span className="active">TaskManeger,</span> venha criar
+            seus planos para o <span className="active">futuro!</span>
           </h1>
-          <p>Creative Digital Design Agency is looking for new talent</p>
+          <p>Organizando sua vida, com qualidade e segurança, no conforto de casa!</p>
           <Button handleClickButton={onClickButton} title="Get Started" />
         </aside>
 
