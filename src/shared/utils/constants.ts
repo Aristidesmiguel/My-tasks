@@ -6,6 +6,8 @@ export const COLLECTION_NAME = "tasks";
 
 export const baseUrl = 'https://my-tasks-bay.vercel.app';
 
+//teste
+
 export const ROUTES = {
     home: "/",
     profile: "/profile",
