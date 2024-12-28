@@ -6,6 +6,7 @@ import { doc, getDoc, setDoc } from 'firebase/firestore';
 
 import { auth, db, googleProvider, storage } from '../services/firebase';
 import { AuthContext } from '../context';
+import { baseUrl } from '../utils';
 
 
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
@@ -49,6 +50,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
                             localStorage.setItem('displayName', userData.displayName);
                             if (location.hostname === 'localhost') {
                                 location.href = "http://localhost:5173/find-task";
+                            } else if (location.hostname === baseUrl) {
+                                location.href = `${baseUrl}/find-task`;
                             }
                             resolve()
                         } else {
@@ -101,6 +104,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
                 localStorage.setItem('displayName', user.displayName);
                 if (location.hostname === 'localhost') {
                     location.href = "http://localhost:5173/find-task";
+                } else if (location.hostname === baseUrl) {
+                    location.href = `${baseUrl}/find-task`;
                 }
             });
     }

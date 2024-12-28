@@ -21,7 +21,7 @@ import { } from "firebase/auth";
 import { Menu } from "../../components";
 import "./style.css";
 import { useEffect, useState } from "react";
-import { ToastStatus } from "../../utils";
+import { baseUrl, ToastStatus } from "../../utils";
 export const SignIn = () => {
   const navigate = useNavigate();
   const [isOpenM, setIsOpen] = useState(false);
@@ -49,7 +49,6 @@ export const SignIn = () => {
   const handleLogin = async () => {
     try {
       await loginWithGoogle();
-      const baseUrl = window.location.origin;
       navigate(`${baseUrl}/find-task`);
     } catch (error) {
       console.error("Erro no login:", error);
@@ -64,10 +63,10 @@ export const SignIn = () => {
   const onClickButton = async () => {
     /* createUser.resgistrarUser(email, password) */
     loginWithEmail(email, password)
-      .then(() => showToast('Usuário(a), criado com sucesso', 'success'))
+      .then(() => showToast('Usuário(a) encontrado', 'success'))
       .catch((error) => {
         console.error(error);
-        showToast('Aconteceu um erro ao tentar registrar o usuário', 'error')
+        showToast('Usuário(a), Não encontrado', 'error')
       });
   }
 
