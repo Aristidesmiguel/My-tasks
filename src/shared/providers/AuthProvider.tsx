@@ -6,6 +6,7 @@ import { doc, getDoc, setDoc } from 'firebase/firestore';
 
 import { auth, db, googleProvider, storage } from '../services/firebase';
 import { AuthContext } from '../context';
+import { ROUTES } from '../utils';
 
 
 
@@ -51,10 +52,11 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
                             localStorage.setItem('displayName', userData.displayName);
                             if (location.hostname === 'localhost') {
                                 location.href = "http://localhost:5173/find-task";
-                            } else if (window.location.hostname === "my-tasks-35ra3233l-aristidesmiguels-projects.vercel.app") {
-                                window.location.href = `https://my-tasks-35ra3233l-aristidesmiguels-projects.vercel.app/find-task`;
+                            } else if (location.hostname === "my-tasks-bay.vercel.app") {
+                                location.href = `https://my-tasks-bay.vercel.app/${ROUTES.dashboard}`;
                             } else {
                                 console.log("aconteceu um erro")
+                                location.href = `https://my-tasks-bay.vercel.app/${ROUTES.home}`;
                             }
                             resolve()
                         } else {
@@ -107,10 +109,11 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
                 localStorage.setItem('displayName', user.displayName);
                 if (location.hostname === 'localhost') {
                     location.href = "http://localhost:5173/find-task";
-                } else if (location.hostname === "my-tasks-35ra3233l-aristidesmiguels-projects.vercel.app.app") {
-                    location.href = `https://my-tasks-35ra3233l-aristidesmiguels-projects.vercel.app/find-task`;
+                } else if (location.hostname === "my-tasks-bay.vercel.app") {
+                    location.href = `https://my-tasks-bay.vercel.app/${ROUTES.dashboard}`;
                 } else {
                     console.log("aconteceu um erro")
+                    location.href = `https://my-tasks-bay.vercel.app/${ROUTES.home}`;
                 }
             });
     }
