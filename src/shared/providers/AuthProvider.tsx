@@ -6,13 +6,14 @@ import { doc, getDoc, setDoc } from 'firebase/firestore';
 
 import { auth, db, googleProvider, storage } from '../services/firebase';
 import { AuthContext } from '../context';
-import { baseUrl } from '../utils';
+import { useNavigate } from 'react-router-dom';
 
 
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     const [user, setUser] = useState<User | null>(null);
     const [loading, setLoading] = useState(true);
     const [entering, setEntering] = useState(false);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
@@ -48,11 +49,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
                             const userData = docSnap.data()
                             localStorage.setItem('photoURL', userData.photoURL);
                             localStorage.setItem('displayName', userData.displayName);
-                            if (location.hostname === 'localhost') {
-                                location.href = "http://localhost:5173/find-task";
-                            } else if (location.hostname === baseUrl) {
-                                location.href = `${baseUrl}/find-task`;
-                            }
+                            navigate('/find-task');
                             resolve()
                         } else {
                             console.log("USER: ", user)
@@ -102,11 +99,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
             .then(() => {
                 localStorage.setItem('photoURL', user.photoURL);
                 localStorage.setItem('displayName', user.displayName);
-                if (location.hostname === 'localhost') {
-                    location.href = "http://localhost:5173/find-task";
-                } else if (location.hostname === baseUrl) {
-                    location.href = `${baseUrl}/find-task`;
-                }
+                navigate('/find-task');
             });
     }
 
