@@ -14,7 +14,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     const [loading, setLoading] = useState(true);
     const [entering, setEntering] = useState(false);
 
-    
+
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
             setUser(currentUser);
@@ -51,11 +51,11 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
                             localStorage.setItem('displayName', userData.displayName);
                             if (location.hostname === 'localhost') {
                                 location.href = "http://localhost:5173/find-task";
-                            } else if (window.location.hostname === "https://my-tasks-bay.vercel.app") {
+                            } else if (window.location.hostname === "my-tasks-bay.vercel.app") {
                                 window.location.href = `https://my-tasks-bay.vercel.app/find-task`;
-                            } else (
+                            } else {
                                 console.log("aconteceu um erro")
-                            )
+                            }
                             resolve()
                         } else {
                             console.log("USER: ", user)
@@ -107,11 +107,11 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
                 localStorage.setItem('displayName', user.displayName);
                 if (location.hostname === 'localhost') {
                     location.href = "http://localhost:5173/find-task";
-                } else if (location.hostname === "https://my-tasks-bay.vercel.app") {
+                } else if (location.hostname === "my-tasks-bay.vercel.app") {
                     location.href = `https://my-tasks-bay.vercel.app/find-task`;
-                } else (
+                } else {
                     console.log("aconteceu um erro")
-                )
+                }
             });
     }
 
