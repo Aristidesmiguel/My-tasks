@@ -4,7 +4,7 @@ export const APP_SECOND_COLOR = "#B4ACF9"
 
 export const COLLECTION_NAME = "tasks";
 
-export const baseUrl = 'https://my-tasks-bay.vercel.app';
+//export const baseUrl = 'https://my-tasks-bay.vercel.app';
 
 //teste
 

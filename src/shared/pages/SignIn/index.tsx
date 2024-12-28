@@ -21,7 +21,7 @@ import { } from "firebase/auth";
 import { Menu } from "../../components";
 import "./style.css";
 import { useEffect, useState } from "react";
-import { baseUrl, ToastStatus } from "../../utils";
+import { ToastStatus } from "../../utils";
 export const SignIn = () => {
   const navigate = useNavigate();
   const [isOpenM, setIsOpen] = useState(false);
@@ -49,7 +49,7 @@ export const SignIn = () => {
   const handleLogin = async () => {
     try {
       await loginWithGoogle();
-      navigate(`${baseUrl}/find-task`);
+      navigate(`/find-task`);
     } catch (error) {
       console.error("Erro no login:", error);
     }
