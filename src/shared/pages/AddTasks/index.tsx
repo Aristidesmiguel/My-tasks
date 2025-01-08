@@ -70,7 +70,7 @@ export const AddTasks = () => {
           error: {
             title: "A tarefa não foi criada",
           },
-          loading: { title: "Atualizando...", position: "top-right" },
+          loading: { title: "Criando...", position: "top-right" },
         })
     }
   };

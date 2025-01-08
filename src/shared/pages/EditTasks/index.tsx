@@ -48,23 +48,18 @@ export const TasksEdit = () => {
     if (e.key === "Enter") {
       if (inputValue === "") {
         showToast("Nenhuma tarefa selecionada", 'info');
+      } else if (selectedTaskId === null) {
+        showToast("Nenhuma tarefa selecionada", 'warning');
       } else {
         mainFunction();
       }
     }
   };
-
-  const handleOnClickButton = () => {
-    if (inputValue === "") {
-      showToast("Nenhuma tarefa selecionada", 'info');
-    } else {
-      mainFunction();
-    }
-  };
+  
 
   const onEditTask = async () => {
     if (selectedTaskId === null) {
-      showToast("Nenhuma tarefa selecionada", 'warning');
+      showToast("Nenhuma tarefa selecionada", 'info');
       return;
     }
     const taskToUpdate = tasks.find((tarefa) => tarefa.id === selectedTaskId);
@@ -125,7 +120,7 @@ export const TasksEdit = () => {
             <div className={editTasks.campTheTasks}>
               <div className={editTasks.createTaskInput}>
                 <FaRegEdit
-                  onClick={handleOnClickButton}
+                  onClick={onEditTask}
                   className={editTasks.search}
                 />
                 <input
