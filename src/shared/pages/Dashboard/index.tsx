@@ -13,22 +13,22 @@ import {
   ModalFooter,
   ModalHeader,
   ModalOverlay,
+  Spinner,
   useToast,
 } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 
 import { DashboardHeader, Menu, TaskItem } from "../../components";
-import { collection, getDocs, query } from "firebase/firestore";
 import dashboardCss from "./dashboard.module.css";
 import dataBase from "../../server/bancoDeDados";
-import { COLLECTION_NAME, ITarefa, ToastStatus } from "../../utils";
-import { db } from "../../services/firebase";
+import { ITarefa, ToastStatus } from "../../utils";
 import { useAuth } from "../../hooks";
 
 export const Dashboard = () => {
   const [isOpenM, setIsOpen] = useState(false);
 
   const [tasks, setTasks] = useState<ITarefa[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
   const [isOpenD, setIsOpenD] = useState(false);
   const [value, setValue] = useState('')
   const [selectedTaskId, setSelectedTaskId] = useState<string | null>(null);
@@ -66,19 +66,10 @@ export const Dashboard = () => {
   const onChoseD = () => {
     setIsOpenD(false);
   };
-  const onOpenD = () => {
+  const onOpenD = (id: string) => {
     setIsOpenD(true);
-    getTasks()
+    setSelectedTaskId(id)
   };
-
-  const getTasks = async () => {
-    const q = query(collection(db, COLLECTION_NAME));
-    const querySnapshot = await getDocs(q);
-    querySnapshot.forEach((doc) => {
-      console.log(doc.id);
-      setSelectedTaskId(doc.id);
-    });
-  }
 
   const onCloseM = () => {
     setIsOpen(false);
@@ -123,11 +114,18 @@ export const Dashboard = () => {
     const newTasks = tasks.map(taskMaped => taskMaped.id === task.id ? { ...task, isSelect: !task.isSelect } : taskMaped)
     setTasks(newTasks)
   };
+
+  const getAllTasks = (tasks: ITarefa[]) => {
+    setTasks(tasks)
+    setIsLoading(false)
+  }
+
   useEffect(() => {
     document.title = "Minhas Tarefas";
-   if (userId){
-      dataBase.buscarTarefas(userId).then((tasks) => setTasks(tasks));
-   }
+    if (userId) {
+      setIsLoading(true)
+      dataBase.buscarTarefas(userId).then((tasks) => getAllTasks(tasks));
+    }
   }, [userId]);
 
   const toast = useToast();
@@ -174,7 +172,7 @@ export const Dashboard = () => {
             <div className={dashboardCss.title_main}>
               <h1>Minhas Tarefas</h1>
               <p>
-              Cadastre suas tarefas e tenha um melhor acompanhamento de suas atividades
+                Cadastre suas tarefas e tenha um melhor acompanhamento de suas atividades
               </p>
             </div>
 
@@ -193,13 +191,22 @@ export const Dashboard = () => {
                 <div className={dashboardCss.title_main}>
                   <h3>{" Tarefas - " + tasks.length}</h3>
                 </div>
-                <div id="myList" className={dashboardCss.tasks}>
-                  <ul>
-                    {tasks.filter(task => task.title?.toLocaleLowerCase().includes(value.toLocaleLowerCase())).map((task) => (
-                      <TaskItem handleToggleComplete={() => handleToggleComplete(task)} onOpenD={onOpenD} task={task} />
-                    ))}
-                  </ul>
-                </div>
+                {
+                  isLoading ? (
+                    <div style={{ display: "flex", flexDirection: "column", alignItems: "center", width: "100%" }}>
+                      <Spinner />
+                      <p>Carregando a lista...</p>
+                    </div>
+                  ) : (
+                    <div id="myList" className={dashboardCss.tasks}>
+                      <ul>
+                        {tasks.filter(task => task.title?.toLocaleLowerCase().includes(value.toLocaleLowerCase())).map((task) => (
+                          <TaskItem handleToggleComplete={() => handleToggleComplete(task)} onOpenD={() => onOpenD(task.id)} task={task} />
+                        ))}
+                      </ul>
+                    </div>
+                  )
+                }
               </div>
             </div>
           </div>

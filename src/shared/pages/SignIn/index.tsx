@@ -22,18 +22,23 @@ import { Menu } from "../../components";
 import "./style.css";
 import { useEffect, useState } from "react";
 import { ToastStatus } from "../../utils";
+
 export const SignIn = () => {
   const navigate = useNavigate();
   const [isOpenM, setIsOpen] = useState(false);
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
+  const { loginWithGoogle, loginWithEmail, entering, user } = useAuth();
+
   const onCloseM = () => {
     setIsOpen(false);
   };
-  
+
   useEffect(() => {
     document.title = "Entrar"
+    if (user)
+      navigate("/find-task")
   })
 
   const onChangeEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -44,7 +49,6 @@ export const SignIn = () => {
   }
 
 
-  const { loginWithGoogle, loginWithEmail, entering } = useAuth();
 
   const handleLogin = async () => {
     try {
@@ -82,9 +86,8 @@ export const SignIn = () => {
     });
   }
 
-  return (
+  return user && (
     <>
-      {/* <DashboardHeader onOpen={onOpenM}></DashboardHeader> */}
       <Box
         h={"100vh"}
         display={"flex"}
@@ -105,18 +108,18 @@ export const SignIn = () => {
           </Box>
           <form action="" /* onSubmit={handleSubmit} */ style={{ width: 320 }}>
             <Box display={'flex'} flexDir={'column'} gap={'2rem'}>
-            <FormControl className="fromControl">
-              <FormLabel >Email</FormLabel>
-              <Input value={email} onChange={onChangeEmail} color={'white'}/>
-            </FormControl>
-            <FormControl className="fromControl">
-              <FormLabel>Password</FormLabel>
-              <Input type="password" value={password} onChange={onChangePassword} color={'white'}/>
-            </FormControl>
+              <FormControl className="fromControl">
+                <FormLabel >Email</FormLabel>
+                <Input value={email} onChange={onChangeEmail} color={'white'} />
+              </FormControl>
+              <FormControl className="fromControl">
+                <FormLabel>Password</FormLabel>
+                <Input type="password" value={password} onChange={onChangePassword} color={'white'} />
+              </FormControl>
             </Box>
             <FormControl mt={8} mb={8}>
               <Box display={'flex'} flexDir={'column'} alignItems={'center'} justifyContent={'space-around'} h={'120px'} >
-                <Button  isLoading={entering} onClick={onClickButton} bgColor={"#B4ACF9"} color={"none"} w={"20em"}>
+                <Button isLoading={entering} onClick={onClickButton} bgColor={"#B4ACF9"} color={"none"} w={"20em"}>
                   Entrar
                 </Button>
                 <Box display={"flex"} alignItems={"center"} justifyContent={"space-between"}>
@@ -148,5 +151,5 @@ export const SignIn = () => {
         </DrawerContent>
       </Drawer>
     </>
-  );
+  )
 };

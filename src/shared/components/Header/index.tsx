@@ -24,8 +24,8 @@ export const DashboardHeader = ({ onOpen }: DashboardHeaderProps) => {
       <div className="icones">
         <img onClick={onOpen} src="menu.png" alt="Menu Hamburger" />
 
-        <div className="addTasks">
-          <img onClick={onClickButton} src="add.png" alt="" />
+        <div onClick={onClickButton} className="addTasks">
+          <img src="add.png" alt="" />
           <p>Criar Tarefa</p>
         </div>
       </div>
