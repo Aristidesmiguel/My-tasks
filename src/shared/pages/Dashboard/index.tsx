@@ -19,13 +19,10 @@ import {
 import React, { useEffect, useState } from "react";
 
 import { DashboardHeader, Menu, TaskItem } from "../../components";
-import { collection, getDocs, query } from "firebase/firestore";
 import dashboardCss from "./dashboard.module.css";
 import dataBase from "../../server/bancoDeDados";
-import { COLLECTION_NAME, ITarefa, ToastStatus } from "../../utils";
-import { db } from "../../services/firebase";
+import { ITarefa, ToastStatus } from "../../utils";
 import { useAuth } from "../../hooks";
-import Loading from "../../components/Loading";
 
 export const Dashboard = () => {
   const [isOpenM, setIsOpen] = useState(false);
