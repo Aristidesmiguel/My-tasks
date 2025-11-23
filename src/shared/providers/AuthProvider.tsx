@@ -42,8 +42,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
             try {
                 setEntering(true);
                 signInWithEmailAndPassword(auth, email, password)
-                    .then(async () => {
-                        const docRef = doc(db, "users", user?.uid ?? "");
+                    .then(async (response) => {
+                        const docRef = doc(db, "users", response.user.uid ?? "");
                         const docSnap = await getDoc(docRef);
 
                         if (docSnap.exists()) {
