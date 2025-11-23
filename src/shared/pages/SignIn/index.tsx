@@ -29,7 +29,7 @@ export const SignIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const { loginWithGoogle, loginWithEmail, entering, user } = useAuth();
+  const { loginWithGoogle, loginWithEmail, entering } = useAuth();
 
   const onCloseM = () => {
     setIsOpen(false);
