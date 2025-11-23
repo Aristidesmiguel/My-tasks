@@ -17,7 +17,7 @@ import {
 import { Link, useNavigate } from "react-router-dom";
 import { BsGoogle } from "react-icons/bs";
 import { useAuth } from "../../hooks";
-import { } from "firebase/auth";
+import {} from "firebase/auth";
 import { Menu } from "../../components";
 import "./style.css";
 import { useEffect, useState } from "react";
@@ -26,8 +26,8 @@ import { ToastStatus } from "../../utils";
 export const SignIn = () => {
   const navigate = useNavigate();
   const [isOpenM, setIsOpen] = useState(false);
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const { loginWithGoogle, loginWithEmail, entering, user } = useAuth();
 
@@ -36,19 +36,15 @@ export const SignIn = () => {
   };
 
   useEffect(() => {
-    document.title = "Entrar"
-    if (user)
-      navigate("/find-task")
-  })
+    document.title = "Entrar";
+  });
 
   const onChangeEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setEmail(e.target.value)
-  }
+    setEmail(e.target.value);
+  };
   const onChangePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setPassword(e.target.value)
-  }
-
-
+    setPassword(e.target.value);
+  };
 
   const handleLogin = async () => {
     try {
@@ -61,20 +57,20 @@ export const SignIn = () => {
 
   const onClickButton = () => {
     if (email === "" || password === "") {
-      showToast('Campo vazio', 'info')
+      showToast("Campo vazio", "info");
     } else {
-      login()
+      login();
     }
-  }
+  };
 
   const login = async () => {
     loginWithEmail(email, password)
-      .then(() => showToast('Usuário(a) encontrado', 'success'))
+      .then(() => showToast("Usuário(a) encontrado", "success"))
       .catch((error) => {
         console.error(error);
-        showToast('Usuário(a), Não encontrado', 'error')
+        showToast("Usuário(a), Não encontrado", "error");
       });
-  }
+  };
 
   const toast = useToast();
   const showToast = (title: string, status: ToastStatus) => {
@@ -84,9 +80,9 @@ export const SignIn = () => {
       isClosable: true,
       status: status,
     });
-  }
+  };
 
-  return user && (
+  return (
     <>
       <Box
         h={"100vh"}
@@ -107,23 +103,47 @@ export const SignIn = () => {
             </Text>
           </Box>
           <form action="" /* onSubmit={handleSubmit} */ style={{ width: 320 }}>
-            <Box display={'flex'} flexDir={'column'} gap={'2rem'}>
+            <Box display={"flex"} flexDir={"column"} gap={"2rem"}>
               <FormControl className="fromControl">
-                <FormLabel >Email</FormLabel>
-                <Input value={email} onChange={onChangeEmail} color={'white'} />
+                <FormLabel>Email</FormLabel>
+                <Input value={email} onChange={onChangeEmail} color={"white"} />
               </FormControl>
               <FormControl className="fromControl">
                 <FormLabel>Password</FormLabel>
-                <Input type="password" value={password} onChange={onChangePassword} color={'white'} />
+                <Input
+                  type="password"
+                  value={password}
+                  onChange={onChangePassword}
+                  color={"white"}
+                />
               </FormControl>
             </Box>
             <FormControl mt={8} mb={8}>
-              <Box display={'flex'} flexDir={'column'} alignItems={'center'} justifyContent={'space-around'} h={'120px'} >
-                <Button isLoading={entering} onClick={onClickButton} bgColor={"#B4ACF9"} color={"none"} w={"20em"}>
+              <Box
+                display={"flex"}
+                flexDir={"column"}
+                alignItems={"center"}
+                justifyContent={"space-around"}
+                h={"120px"}
+              >
+                <Button
+                  isLoading={entering}
+                  onClick={onClickButton}
+                  bgColor={"#B4ACF9"}
+                  color={"none"}
+                  w={"20em"}
+                >
                   Entrar
                 </Button>
-                <Box display={"flex"} alignItems={"center"} justifyContent={"space-between"}>
-                  <Text>Ainda não tem uma conta? <Link to={"/sign-up"}>Criar conta</Link></Text>
+                <Box
+                  display={"flex"}
+                  alignItems={"center"}
+                  justifyContent={"space-between"}
+                >
+                  <Text>
+                    Ainda não tem uma conta?{" "}
+                    <Link to={"/sign-up"}>Criar conta</Link>
+                  </Text>
                 </Box>
                 <Text>------ ou ------</Text>
                 <Button
@@ -151,5 +171,5 @@ export const SignIn = () => {
         </DrawerContent>
       </Drawer>
     </>
-  )
+  );
 };

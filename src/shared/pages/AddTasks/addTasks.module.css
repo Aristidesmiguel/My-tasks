@@ -143,6 +143,7 @@ label{
         display: flex;
         justify-content: center;
         align-items: center;
+        background-color: aqua;
     }
     .corpo{
         width: 80vw;
@@ -161,7 +162,6 @@ label{
     }
     .title img{
         background-color: #363041;
-        padding: 5px;
         border-radius: 50%;
         cursor: pointer;
         text-align: center;
@@ -186,6 +186,7 @@ label{
         display: flex;
         justify-content: center;
         align-items: center;
+        
     }
     .corpo{
         width: 80vw;
@@ -229,6 +230,7 @@ label{
         display: flex;
         justify-content: center;
         align-items: center;
+        
     }
     .corpo{
         width: 80vw;

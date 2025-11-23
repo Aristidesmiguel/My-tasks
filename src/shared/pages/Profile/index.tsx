@@ -103,7 +103,7 @@ export const Profile = () => {
           </Box>
         </Box>
         <Box>
-            <Button className={profile.button} onClick={logout}>Sair</Button>
+            <Button className={profile.button} onClick={logout}>Sair da conta</Button>
         </Box>
       </Box>
       <Drawer placement="left" onClose={onClose} isOpen={isOpen}>

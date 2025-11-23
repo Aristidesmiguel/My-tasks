@@ -18,16 +18,6 @@ export const Navbar = () => {
         </span>
       </a>
 
-      <ul>
-        <li>
-          <a href="/about" className="active">
-          Sobre
-          </a>
-        </li>
-        <li>
-          <a href="/cases">Contacto</a>
-        </li>
-      </ul>
       <Button title="Sign In" handleClickButton={handleOnCkick} />
     </div>
     </>
